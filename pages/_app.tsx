@@ -1,8 +1,19 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+import { Amplify } from 'aws-amplify';
+import awsExports from '../src/aws-exports';
 
-export default MyApp
+import SiteHeader from '../components/siteHeader';
+
+
+Amplify.configure({ ...awsExports, ssr: true });
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <div>
+      <SiteHeader />
+      <Component {...pageProps} />
+    </div>
+  );
+}
