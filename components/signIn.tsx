@@ -54,6 +54,7 @@ export default function SignIn({ handleExit, authType }: any) {
           </div>
         </header>
         <div className={styles.modalBody}>
+          {(authType == 'signIn') ? <h2>Welcome back </h2> : <p>Nice to meet you. Sign Up to start adding your favorite song lyrics!</p>}
           <form className={styles.signInForm} onSubmit={handleSubmit}>
             <div className={styles.inputFields}>
               <input
