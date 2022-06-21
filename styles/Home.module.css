@@ -118,7 +118,7 @@
 .header {
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
-  position: fixed;
+  position: sticky;
   width: 100%;
   background-color: rgb(72, 72, 72);
   color: #fff;
@@ -159,8 +159,33 @@
   box-shadow: 2px 5px 3px #2e2d2d;
 }
 
+.headerDropDown {
+  box-sizing: border-box;
+  position: absolute;
+  top: 60px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  margin-top: 34px;
+  padding: 8px 0;
+  right: 0;
+  color: rgb(72, 72, 72);
+}
+
+.headerDropDown div {
+  padding: 0px 8px;
+}
+
+.headerDropDown div:hover {
+  background-color: rgb(235, 235, 235);
+  cursor: pointer;
+}
+
 .modal {
-  z-index: 10;
   position: fixed;
   inset: 0px;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;

@@ -1,29 +1,40 @@
 import { Auth } from 'aws-amplify';
 import styles from '../styles/Home.module.css';
 
-export default function SignIn({ handleExit }: any) {
+export default function SignIn({ handleExit, authType }: any) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & { target: HTMLFormElement }) => {
     event.preventDefault();
+    console.log(authType);
 
     const form: FormData = new FormData(event.target);
     if (form.get('username') && form.get('password')) {
       const username: string = form.get('username') as string;
       const password: string = form.get('password') as string;
 
-      try {
-        const { user } = await Auth.signUp({
-          username,
-          password
-        });
-        console.log(user);
-      } catch (error) {
-        console.log('error signing up:', error);
+      if (authType == 'signUp') {
+
+        try {
+          const { user } = await Auth.signUp({
+            username,
+            password
+          });
+          console.log(user);
+        } catch (error) {
+          console.log('error signing up:', error);
+        }
+      } else if (authType == 'signIn') {
+        try {
+          const user = await Auth.signIn(username, password);
+        } catch (error) {
+          console.log('error signing in', error);
+        }
       }
     } else {
 
     }
   };
+
   return (
     <div>
       <div className={styles.modalBackdrop} onClick={handleExit}></div>

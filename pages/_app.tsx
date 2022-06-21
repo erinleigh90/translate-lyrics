@@ -12,9 +12,13 @@ Amplify.configure({ ...awsExports, ssr: true });
 
 export default function App({ Component, pageProps }: AppProps) {
   const [showSignIn, setShowSignIn] = useState(false);
+  const [authAction, setAuthAction] = useState('');
 
-  const handleShowSignIn = () => { setShowSignIn(true) };
-  const handleCloseSignIn = () => { setShowSignIn(false) };
+  const handleShowSignIn = (actionType: string) => {
+    setAuthAction(actionType);
+    setShowSignIn(true);
+  }
+  const handleCloseSignIn = () => { setShowSignIn(false); }
 
   return (
     <div>
