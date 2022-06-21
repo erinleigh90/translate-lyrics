@@ -39,3 +39,13 @@ export async function signIn(username: string, password: string) {
     throw 'Hmmmm, that didn\'t work. Try a different username or password.';
   }
 }
+
+export async function getCurrentUser() {
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+    return user;
+  } catch (error: any) {
+    console.log(error);
+    return null;
+  }
+}
