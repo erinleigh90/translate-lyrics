@@ -163,7 +163,7 @@
   box-shadow: 2px 5px 3px #2e2d2d;
 }
 
-.headerDropDown {
+.headerDropDownContainer {
   box-sizing: border-box;
   position: absolute;
   top: 60px;
@@ -184,6 +184,7 @@
   padding: 0px 15px;
   line-height: 2.25rem;
   font-size: .95rem;
+  cursor: pointer;
 }
 
 .headerDropDown div:first-child {
@@ -192,7 +193,6 @@
 
 .headerDropDown div:hover {
   background-color: rgb(235, 235, 235);
-  cursor: pointer;
 }
 
 .modal {
