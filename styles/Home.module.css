@@ -202,13 +202,15 @@
   color: rgb(72, 72, 72);
   -webkit-font-smoothing: antialiased;
   max-width: 568px;
-  max-height: 320px;
+  max-height: 422px;
   margin: 40px auto;
   border-radius: 12px;
   background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
+  overflow-y: scroll;
+  --scrollbar-gutter: 0px;
 }
 
 .modalBackdrop {
@@ -258,13 +260,18 @@
 }
 
 .signInForm input[type="text"],
-.signInForm input[type="password"] {
+.signInForm input[type="password"],
+.signInForm input[type="email"] {
   width: 100%;
   margin: 0px;
   border: 1px solid #9b9898;
   border-bottom: none;
   padding: 0.75rem;
   font-size: 1.05rem;
+}
+
+.inputFields input:only-child {
+  border-radius: 10px !important;
 }
 
 .inputFields input:first-child {
@@ -294,4 +301,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.errorMessage {
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 10px;
+  display: flex;
+}
+
+.errorIcon {
+  background-color: #fc8071;
+  padding: 0px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px 0px 0px 8px;
+}
+
+.errorMessage svg {
+  height: 24px;
+  width: 24px;
+  display: block;
+  fill: rgb(255, 255, 255);
+}
+
+.errorText {
+  padding: 0.75rem;
+  font-weight: 500;
+  font-size: .9rem;
 }

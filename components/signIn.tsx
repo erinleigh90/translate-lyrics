@@ -1,36 +1,50 @@
-import { Auth } from 'aws-amplify';
+import { signUp, confirmEmail, signIn } from '../utilities/authMethods';
 import styles from '../styles/Home.module.css';
+import { useState } from 'react';
 
 export default function SignIn({ handleExit, authType }: any) {
+  const [authErrors, setAuthErrors] = useState('');
+  let authLabel: string = '';
+  let inputs: string[] = [];
+
+  switch (authType) {
+    case 'signUp':
+      authLabel = 'Sign Up';
+      inputs = ['Username', 'Password', 'Email'];
+      break;
+    case 'confirm':
+      authLabel = 'Confirm Email';
+      inputs = ['Username', 'Code'];
+      break;
+    case 'signIn':
+      authLabel = 'Log In';
+      inputs = ['Username', 'Password'];
+      break;
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & { target: HTMLFormElement }) => {
     event.preventDefault();
 
     const form: FormData = new FormData(event.target);
-    if (form.get('username') && form.get('password')) {
-      const username: string = form.get('username') as string;
-      const password: string = form.get('password') as string;
+    const username: string = form.get('username') as string;
+    const password: string = form.get('password') as string;
+    const code: string = form.get('code') as string;
+    const email: string = form.get('email') as string;
 
-      if (authType == 'signUp') {
-
-        try {
-          const { user } = await Auth.signUp({
-            username,
-            password
-          });
-          console.log(user);
-        } catch (error) {
-          console.log('error signing up:', error);
-        }
-      } else if (authType == 'signIn') {
-        try {
-          const user = await Auth.signIn(username, password);
-        } catch (error) {
-          console.log('error signing in', error);
-        }
+    try {
+      switch (authType) {
+        case 'signUp':
+          signUp(username, password, email);
+          break;
+        case 'confirm':
+          confirmEmail(username, code);
+          break;
+        case 'signIn':
+          signIn(username, password);
+          break;
       }
-    } else {
-
+    } catch (error: any) {
+      setAuthErrors(error.toString());
     }
   };
 
@@ -50,11 +64,23 @@ export default function SignIn({ handleExit, authType }: any) {
         </div>
         <header className={styles.modalHeader}>
           <div>
-            <h3>{(authType == 'signIn') ? 'Log In' : 'Sign Up'}</h3>
+            <h3>{authLabel}</h3>
           </div>
         </header>
         <div className={styles.modalBody}>
-          {(authType == 'signIn') ? <h2>Welcome back </h2> : <p>Nice to meet you. Sign Up to start adding your favorite song lyrics!</p>}
+          {authErrors ?
+            <div className={styles.errorMessage}>
+              <div className={styles.errorIcon}>
+                <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false">
+                  <path d="m23.49 20.79c.39.73.12 1.64-.61 2.03-.22.12-.46.18-.71.18h-20.33c-.83 0-1.5-.67-1.5-1.5 0-.25.06-.49.18-.71l10.16-18.94c.39-.73 1.3-1 2.03-.61.26.14.47.35.61.61zm-11.05-18.47c-.05-.09-.12-.16-.2-.2-.24-.13-.55-.04-.68.2l-10.16 18.94c-.04.07-.06.15-.06.24 0 .28.22.5.5.5h20.33c.08 0 .16-.02.24-.06.24-.13.33-.43.2-.68zm-.48 4.68c-.58.02-1.04.51-1.02 1.1l.29 7.42c.01.27.23.48.5.48h.54c.27 0 .49-.21.5-.48l.29-7.42c0-.01 0-.03 0-.04 0-.58-.47-1.06-1.06-1.06-.01 0-.03 0-.04 0zm-.96 12c0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1-1 .45-1 1z"></path>
+                </svg>
+              </div>
+              <div className={styles.errorText}>
+                {authErrors}
+              </div>
+            </div>
+            : null}
+          {(authType == 'signIn') ? <h2>Welcome back!</h2> : <p>Nice to meet you. Sign Up to start adding your favorite song lyrics!</p>}
           <form className={styles.signInForm} onSubmit={handleSubmit}>
             <div className={styles.inputFields}>
               <input
@@ -62,11 +88,27 @@ export default function SignIn({ handleExit, authType }: any) {
                 name="username"
                 placeholder="Username"
                 required />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required />
+              {(inputs.indexOf('Password') >= 0) ?
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  required />
+                : null}
+              {(inputs.indexOf('Email') >= 0) ?
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  required />
+                : null}
+              {(inputs.indexOf('Code') >= 0) ?
+                <input
+                  type="text"
+                  name="code"
+                  placeholder="Code"
+                  required />
+                : null}
             </div>
             <input className={styles.signInSubmit} type="submit" name="Sign In" />
           </form>
