@@ -5,32 +5,33 @@ import type { AppProps } from 'next/app';
 import { Amplify, Auth } from 'aws-amplify';
 import awsExports from '../src/aws-exports';
 
+import { UserContext } from '../utilities/userContextMethods';
 import SiteHeader from '../components/siteHeader';
 import SignIn from '../components/signIn';
 
 Amplify.configure({ ...awsExports, ssr: true });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const UserContext = createContext(null);
   const [user, setUser] = useState(null);
   const [showSignIn, setShowSignIn] = useState(false);
   const [authAction, setAuthAction] = useState('');
 
   const getUser = async () => {
-    if (!user) {
-      try {
-        const user = await Auth.currentAuthenticatedUser();
-        setUser(user);
-      } catch (error: any) {
-        console.log(error);
-        setUser(null);
-      }
+    try {
+      const currentUser = await Auth.currentAuthenticatedUser();
+      setUser(currentUser);
+    } catch (error: any) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
     getUser();
-  }, [user]);
+  }, []);
+
+  const addUser = (user: any) => {
+    setUser(user);
+  };
 
   const handleShowSignIn = (actionType: string) => {
     setAuthAction(actionType);

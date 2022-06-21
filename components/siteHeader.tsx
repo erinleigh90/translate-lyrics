@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../utilities/userContextMethods";
 import styles from '../styles/Home.module.css';
 
 export default function SiteHeader({ handleShowSignIn }: any) {
+  const user = useContext(UserContext);
+  console.log(user);
   const [showDropDown, setShowDropDown] = useState(false);
 
   const handleOpenCloseDropDown = () => {
@@ -21,6 +24,26 @@ export default function SiteHeader({ handleShowSignIn }: any) {
     handleShowSignIn(actionType);
   }
 
+  const getUserMenuLabel = (user: any) => {
+    if (user != null) {
+      return `Hi ${user.username}!`;
+    }
+    return 'Log In / Sign Up';
+  };
+  const authenticatedUserMenu = (
+    <div className={styles.headerDropDown}>
+      <div onMouseDown={handleSignUpSignIn} data-action="confirm">Confirm Email</div>
+      <div onMouseDown={handleSignUpSignIn} data-action="signOut">Sign Out</div>
+    </div>
+  );
+
+  const unauthenticatedUserMenu = (
+    <div className={styles.headerDropDown}>
+      <div onMouseDown={handleSignUpSignIn} data-action="signUp">Sign Up</div>
+      <div onMouseDown={handleSignUpSignIn} data-action="signIn">Log In</div>
+    </div>
+  );
+
   return (
     <header className={styles.header}>
       <div className={styles.headerDiv}>
@@ -28,11 +51,10 @@ export default function SiteHeader({ handleShowSignIn }: any) {
           <h3>Translate<span className={styles.brandColor}>Lyrics</span></h3>
         </div>
         <div className={styles.userMenuDiv}>
-          <input className={styles.headerButton} type="submit" name="auth" value="Log In/Sign Up" onClick={handleOpenCloseDropDown} onBlur={handleCloseDropDown} />
+          <input className={styles.headerButton} type="submit" name="userMenu" value={getUserMenuLabel(user)} onClick={handleOpenCloseDropDown} onBlur={handleCloseDropDown} />
           {showDropDown ?
-            <div className={styles.headerDropDown}>
-              <div onMouseDown={handleSignUpSignIn} data-action="signUp">Sign Up</div>
-              <div onMouseDown={handleSignUpSignIn} data-action="signIn">Log In</div>
+            <div className={styles.headerDropDownContainer}>
+              {(user != null) ? authenticatedUserMenu : unauthenticatedUserMenu}
             </div>
             : null}
         </div>
