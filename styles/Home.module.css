@@ -115,6 +115,10 @@
   }
 }
 
+.brandColor {
+  color: #25d39d;
+}
+
 .header {
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
