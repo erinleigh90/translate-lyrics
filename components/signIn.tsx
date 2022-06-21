@@ -35,21 +35,22 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
     const password: string = form.get('password') as string;
     const code: string = form.get('code') as string;
     const email: string = form.get('email') as string;
+    let user: any;
 
     try {
       switch (authType) {
         case 'signUp':
-          await signUp(username, password, email);
+          user = await signUp(username, password, email);
           break;
         case 'confirm':
           await confirmEmail(username, code);
           break;
         case 'signIn':
-          await signIn(username, password);
+          user = await signIn(username, password);
           break;
       }
 
-      handleSuccess();
+      handleSuccess(user);
     } catch (error: any) {
       setAuthErrors(error.toString());
     }

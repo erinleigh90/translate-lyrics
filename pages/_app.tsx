@@ -17,25 +17,32 @@ export default function App({ Component, pageProps }: AppProps) {
   const [authAction, setAuthAction] = useState('');
 
   const getUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      setUser(user);
-    } catch (error: any) {
-      console.log(error);
-      setUser(null);
+    if (!user) {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        setUser(user);
+      } catch (error: any) {
+        console.log(error);
+        setUser(null);
+      }
     }
   };
 
   useEffect(() => {
     getUser();
-  });
+  }, [user]);
 
   const handleShowSignIn = (actionType: string) => {
     setAuthAction(actionType);
     setShowSignIn(true);
   }
+
   const handleCloseSignIn = () => { setShowSignIn(false); }
-  const handleSignInSuccess = () => {
+  const handleSignInSuccess = ({ user }: any) => {
+    if (user != null) {
+      setUser(user);
+    }
+
     if (authAction == 'signUp') {
       setAuthAction('confirm');
     } else {
