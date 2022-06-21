@@ -115,8 +115,12 @@
   }
 }
 
-.brandColor {
+.brandColor_Primary {
   color: #25d39d;
+}
+
+.brandColor_Secondary {
+  color: #8a02b3;
 }
 
 .header {

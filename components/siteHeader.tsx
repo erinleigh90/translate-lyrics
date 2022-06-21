@@ -47,7 +47,7 @@ export default function SiteHeader({ handleShowSignIn }: any) {
     <header className={styles.header}>
       <div className={styles.headerDiv}>
         <div className={styles.headerTitle}>
-          <h3>Translate<span className={styles.brandColor}>Lyrics</span></h3>
+          <h3>Translate<span className={styles.brandColor_Primary}>Lyrics</span></h3>
         </div>
         <div className={styles.userMenuDiv}>
           <input className={styles.headerButton} type="submit" name="userMenu" value={getUserMenuLabel(user)} onClick={handleOpenCloseDropDown} onBlur={handleCloseDropDown} />

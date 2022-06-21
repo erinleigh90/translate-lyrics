@@ -1,4 +1,4 @@
-import { signUp, confirmEmail, signIn, signOut } from '../utilities/authMethods';
+import { signUp, confirmEmail, signIn, signOut, resendConfirmationCode } from '../utilities/authMethods';
 import styles from '../styles/Home.module.css';
 import { useState } from 'react';
 
@@ -22,7 +22,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
       const password: string = form.get('password') as string;
       const code: string = form.get('code') as string;
       const email: string = form.get('email') as string;
-      let user: any;
+      let user: any = null;
 
       try {
         switch (authType) {
@@ -36,10 +36,17 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
             user = await signIn(username, password);
             break;
         }
-
+        let successProps = { currentUser: user, nextAction: '' };
+        if (authType == 'signUp') {
+          successProps.nextAction = 'confirm';
+        }
         handleSuccess(user);
       } catch (e: any) {
-        setAuthErrors(e.toString());
+        if (e.toString().indexOf('ConfirmUser') >= 0) {
+          handleSuccess({ user: null, nextAction: 'confirm' });
+        } else {
+          setAuthErrors(e.toString());
+        }
       }
     }
   };
@@ -135,6 +142,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
                   required />
                 : null}
             </div>
+            {(authType == 'confirm') ? <p>Can't find your confirmation code? <a>Resend Code</a></p> : null}
             {(authType != 'signOut') ? <input className={styles.signInSubmit} type="submit" name="Sign In" /> : null}
           </form>
         </div>

@@ -29,23 +29,20 @@ export default function App({ Component, pageProps }: AppProps) {
     getUser();
   }, []);
 
-  const addUser = (user: any) => {
-    setUser(user);
-  };
-
   const handleShowSignIn = (actionType: string) => {
     setAuthAction(actionType);
     setShowSignIn(true);
   }
 
   const handleCloseSignIn = () => { setShowSignIn(false); }
-  const handleSignInSuccess = ({ user }: any) => {
-    if (user != null) {
-      setUser(user);
+  const handleAuthSuccess = ({ currentUser, nextAction }: any) => {
+    console.log(currentUser);
+    if (user != currentUser) {
+      setUser(currentUser);
     }
 
-    if (authAction == 'signUp') {
-      setAuthAction('confirm');
+    if (nextAction) {
+      setAuthAction(nextAction);
     } else {
       setShowSignIn(false);
     }
@@ -55,7 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <UserContext.Provider value={user}>
       <SiteHeader handleShowSignIn={handleShowSignIn} />
       <Component {...pageProps} />
-      {showSignIn ? <SignIn handleExit={handleCloseSignIn} handleSuccess={handleSignInSuccess} authType={authAction} /> : null}
+      {showSignIn ? <SignIn handleExit={handleCloseSignIn} handleSuccess={handleAuthSuccess} authType={authAction} /> : null}
     </UserContext.Provider>
   );
 }
