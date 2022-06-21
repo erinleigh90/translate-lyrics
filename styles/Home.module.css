@@ -252,3 +252,10 @@
   cursor: pointer;
   margin-top: 1.25rem;
 }
+
+.homeMainContent {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

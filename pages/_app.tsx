@@ -19,7 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div>
       <SiteHeader handleShowSignIn={handleShowSignIn} />
-      <Component {...pageProps} />
+      <div className="main-content">
+        <Component {...pageProps} />
+      </div>
       {showSignIn ? <SignIn handleExit={handleCloseSignIn} /> : null}
     </div>
   );
