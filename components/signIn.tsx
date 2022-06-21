@@ -2,7 +2,7 @@ import { signUp, confirmEmail, signIn } from '../utilities/authMethods';
 import styles from '../styles/Home.module.css';
 import { useState } from 'react';
 
-export default function SignIn({ handleExit, authType }: any) {
+export default function SignIn({ handleExit, handleSuccess, authType }: any) {
   const [authErrors, setAuthErrors] = useState('');
   let authLabel: string = '';
   let inputs: string[] = [];
@@ -24,6 +24,7 @@ export default function SignIn({ handleExit, authType }: any) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & { target: HTMLFormElement }) => {
     event.preventDefault();
+    setAuthErrors('');
 
     const form: FormData = new FormData(event.target);
     const username: string = form.get('username') as string;
@@ -34,13 +35,13 @@ export default function SignIn({ handleExit, authType }: any) {
     try {
       switch (authType) {
         case 'signUp':
-          signUp(username, password, email);
+          await signUp(username, password, email);
           break;
         case 'confirm':
-          confirmEmail(username, code);
+          await confirmEmail(username, code);
           break;
         case 'signIn':
-          signIn(username, password);
+          await signIn(username, password);
           break;
       }
     } catch (error: any) {

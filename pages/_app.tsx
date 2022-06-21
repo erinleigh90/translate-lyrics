@@ -19,6 +19,13 @@ export default function App({ Component, pageProps }: AppProps) {
     setShowSignIn(true);
   }
   const handleCloseSignIn = () => { setShowSignIn(false); }
+  const handleSignInSuccess = () => {
+    if (authAction == 'signUp') {
+      setAuthAction('confirm');
+    } else {
+      setShowSignIn(false);
+    }
+  }
 
   return (
     <div>
@@ -26,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="main-content">
         <Component {...pageProps} />
       </div>
-      {showSignIn ? <SignIn handleExit={handleCloseSignIn} authType={authAction} /> : null}
+      {showSignIn ? <SignIn handleExit={handleCloseSignIn} handleSuccess={handleSignInSuccess} authType={authAction} /> : null}
     </div>
   );
 }
