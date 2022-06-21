@@ -1,19 +1,26 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { useState } from "react";
+import type { AppProps } from 'next/app';
 
 import { Amplify } from 'aws-amplify';
 import awsExports from '../src/aws-exports';
 
 import SiteHeader from '../components/siteHeader';
-
+import SignIn from '../components/signIn';
 
 Amplify.configure({ ...awsExports, ssr: true });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [showSignIn, setShowSignIn] = useState(false);
+
+  const handleShowSignIn = () => { setShowSignIn(true) };
+  const handleCloseSignIn = () => { setShowSignIn(false) };
+
   return (
     <div>
-      <SiteHeader />
+      <SiteHeader handleShowSignIn={handleShowSignIn} />
       <Component {...pageProps} />
+      {showSignIn ? <SignIn handleExit={handleCloseSignIn} /> : null}
     </div>
   );
 }
