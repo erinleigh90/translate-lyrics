@@ -4,6 +4,15 @@ import { useState } from 'react';
 
 export default function SignIn({ handleExit, handleSuccess, authType }: any) {
   const [authErrors, setAuthErrors] = useState('');
+  const [username, setUsername] = useState('');
+  const [codeSent, setCodeSent] = useState(false);
+
+  const handleChange = (event: any) => {
+    console.log(event.target.name, event.target.value)
+    if (event.target.name == 'username') {
+      setUsername(event.target.value);
+    }
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> | null) => {
     if (event == null) {
@@ -18,7 +27,6 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
       setAuthErrors('');
 
       const form: FormData = new FormData(event.target as HTMLFormElement);
-      const username: string = form.get('username') as string;
       const password: string = form.get('password') as string;
       const code: string = form.get('code') as string;
       const email: string = form.get('email') as string;
@@ -51,6 +59,15 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
     }
   };
 
+  const handleResend = async () => {
+    try {
+      await resendConfirmationCode(username);
+      setCodeSent(true);
+    } catch (e: any) {
+      setAuthErrors(e.toString());
+    }
+  }
+
   let authLabel: string = '';
   let greeting: string = '';
   let inputs: string[] = [];
@@ -64,7 +81,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
     case 'confirm':
       authLabel = 'Confirm Email';
       inputs = ['Username', 'Code'];
-      greeting = 'Check your email for the confirmation code we sent to you so we can confirm your email address';
+      greeting = 'Check your email for the confirmation code we sent to you so we can confirm your email address.';
       break;
     case 'signIn':
       authLabel = 'Log In';
@@ -118,6 +135,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
                   type="text"
                   name="username"
                   placeholder="Username"
+                  onChange={handleChange}
                   required />
                 : null}
               {(inputs.indexOf('Password') >= 0) ?
@@ -142,7 +160,10 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
                   required />
                 : null}
             </div>
-            {(authType == 'confirm') ? <p>Can't find your confirmation code? <a>Resend Code</a></p> : null}
+            {(authType == 'confirm') ?
+              <p>Can't find your confirmation code? <a onClick={handleResend}>Resend Code</a></p>
+              : null
+            }
             {(authType != 'signOut') ? <input className={styles.signInSubmit} type="submit" name="Sign In" /> : null}
           </form>
         </div>
