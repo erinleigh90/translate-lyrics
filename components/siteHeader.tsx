@@ -32,7 +32,6 @@ export default function SiteHeader({ handleShowSignIn }: any) {
   };
   const authenticatedUserMenu = (
     <div className={styles.headerDropDown}>
-      <div onMouseDown={handleSignUpSignIn} data-action="confirm">Confirm Email</div>
       <div onMouseDown={handleSignUpSignIn} data-action="signOut">Sign Out</div>
     </div>
   );

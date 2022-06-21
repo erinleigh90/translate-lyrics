@@ -1,9 +1,49 @@
-import { signUp, confirmEmail, signIn } from '../utilities/authMethods';
+import { signUp, confirmEmail, signIn, signOut } from '../utilities/authMethods';
 import styles from '../styles/Home.module.css';
 import { useState } from 'react';
 
 export default function SignIn({ handleExit, handleSuccess, authType }: any) {
   const [authErrors, setAuthErrors] = useState('');
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement> | null) => {
+    if (event == null) {
+      try {
+        await signOut();
+        handleSuccess(null);
+      } catch (e: any) {
+        setAuthErrors(e.toString());
+      }
+    } else {
+      event.preventDefault();
+      setAuthErrors('');
+
+      const form: FormData = new FormData(event.target as HTMLFormElement);
+      const username: string = form.get('username') as string;
+      const password: string = form.get('password') as string;
+      const code: string = form.get('code') as string;
+      const email: string = form.get('email') as string;
+      let user: any;
+
+      try {
+        switch (authType) {
+          case 'signUp':
+            user = await signUp(username, password, email);
+            break;
+          case 'confirm':
+            await confirmEmail(username, code);
+            break;
+          case 'signIn':
+            user = await signIn(username, password);
+            break;
+        }
+
+        handleSuccess(user);
+      } catch (e: any) {
+        setAuthErrors(e.toString());
+      }
+    }
+  };
+
   let authLabel: string = '';
   let greeting: string = '';
   let inputs: string[] = [];
@@ -12,7 +52,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
     case 'signUp':
       authLabel = 'Sign Up';
       inputs = ['Username', 'Password', 'Email'];
-      greeting = 'Nice to meet you. Sign Up to start adding your favorite song lyrics!'
+      greeting = 'Encantado de conocerte. Sign Up to start adding your favorite song lyrics!';
       break;
     case 'confirm':
       authLabel = 'Confirm Email';
@@ -22,39 +62,14 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
     case 'signIn':
       authLabel = 'Log In';
       inputs = ['Username', 'Password'];
-      greeting = 'Welcome back!';
+      greeting = 'Willkommen zurück!';
       break;
+    case 'signOut':
+      authLabel = 'Sign Out';
+      inputs = [];
+      greeting = 'À bientôt!';
+      handleSubmit(null);
   }
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & { target: HTMLFormElement }) => {
-    event.preventDefault();
-    setAuthErrors('');
-
-    const form: FormData = new FormData(event.target);
-    const username: string = form.get('username') as string;
-    const password: string = form.get('password') as string;
-    const code: string = form.get('code') as string;
-    const email: string = form.get('email') as string;
-    let user: any;
-
-    try {
-      switch (authType) {
-        case 'signUp':
-          user = await signUp(username, password, email);
-          break;
-        case 'confirm':
-          await confirmEmail(username, code);
-          break;
-        case 'signIn':
-          user = await signIn(username, password);
-          break;
-      }
-
-      handleSuccess(user);
-    } catch (error: any) {
-      setAuthErrors(error.toString());
-    }
-  };
 
   return (
     <div>
@@ -91,11 +106,13 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
           <p>{greeting}</p>
           <form className={styles.signInForm} onSubmit={handleSubmit}>
             <div className={styles.inputFields}>
-              <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                required />
+              {(inputs.indexOf('Username') >= 0) ?
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  required />
+                : null}
               {(inputs.indexOf('Password') >= 0) ?
                 <input
                   type="password"
@@ -118,7 +135,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
                   required />
                 : null}
             </div>
-            <input className={styles.signInSubmit} type="submit" name="Sign In" />
+            {(authType != 'signOut') ? <input className={styles.signInSubmit} type="submit" name="Sign In" /> : null}
           </form>
         </div>
       </div>

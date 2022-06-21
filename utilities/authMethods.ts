@@ -1,5 +1,4 @@
 import { Auth } from 'aws-amplify';
-import { createContext } from 'react';
 
 export async function signUp(username: string, password: string, email: string) {
   try {
@@ -38,5 +37,14 @@ export async function signIn(username: string, password: string) {
   } catch (error) {
     console.log('error signing in', error);
     throw 'Hmmmm, that didn\'t work. Try a different username or password.';
+  }
+}
+
+export async function signOut() {
+  try {
+    await Auth.signOut();
+  } catch (error) {
+    console.log('error signing out: ', error);
+    throw 'Sign out failed, I guess you\'re stuck with us 🤷‍♀️';
   }
 }
