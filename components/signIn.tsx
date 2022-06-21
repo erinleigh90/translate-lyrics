@@ -5,20 +5,24 @@ import { useState } from 'react';
 export default function SignIn({ handleExit, handleSuccess, authType }: any) {
   const [authErrors, setAuthErrors] = useState('');
   let authLabel: string = '';
+  let greeting: string = '';
   let inputs: string[] = [];
 
   switch (authType) {
     case 'signUp':
       authLabel = 'Sign Up';
       inputs = ['Username', 'Password', 'Email'];
+      greeting = 'Nice to meet you. Sign Up to start adding your favorite song lyrics!'
       break;
     case 'confirm':
       authLabel = 'Confirm Email';
       inputs = ['Username', 'Code'];
+      greeting = 'Check your email for the confirmation code we sent to you so we can confirm your email address';
       break;
     case 'signIn':
       authLabel = 'Log In';
       inputs = ['Username', 'Password'];
+      greeting = 'Welcome back!';
       break;
   }
 
@@ -44,6 +48,8 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
           await signIn(username, password);
           break;
       }
+
+      handleSuccess();
     } catch (error: any) {
       setAuthErrors(error.toString());
     }
@@ -81,7 +87,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
               </div>
             </div>
             : null}
-          {(authType == 'signIn') ? <h2>Welcome back!</h2> : <p>Nice to meet you. Sign Up to start adding your favorite song lyrics!</p>}
+          <p>{greeting}</p>
           <form className={styles.signInForm} onSubmit={handleSubmit}>
             <div className={styles.inputFields}>
               <input
