@@ -1,10 +1,7 @@
 import { Auth } from 'aws-amplify';
 import styles from '../styles/Home.module.css';
 
-export default function SignIn() {
-  const handleClose = () => {
-
-  }
+export default function SignIn({ handleExit }: any) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & { target: HTMLFormElement }) => {
     event.preventDefault();
@@ -29,10 +26,10 @@ export default function SignIn() {
   };
   return (
     <div>
-      <div className={styles.modalBackdrop}></div>
+      <div className={styles.modalBackdrop} onClick={handleExit}></div>
       <div className={styles.modal} role="dialog">
         <div className={styles.modalExit}>
-          <button aria-label="Close" type="button" class="_oda838">
+          <button aria-label="Close" type="button" onClick={handleExit}>
             <span>
               <svg viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
                 <path d="m6 6 20 20"></path>

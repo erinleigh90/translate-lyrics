@@ -10,6 +10,8 @@ export default function SiteHeader() {
     setShowSignIn(true);
   };
 
+  const handleCloseSignIn = () => { setShowSignIn(false) };
+
   return (
     <div>
       <header className={styles.header}>
@@ -22,7 +24,7 @@ export default function SiteHeader() {
           </div>
         </div>
       </header>
-      {showSignIn ? <SignIn /> : null}
+      {showSignIn ? <SignIn handleExit={handleCloseSignIn} /> : null}
     </div>
   );
 }
