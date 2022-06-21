@@ -5,7 +5,6 @@ export default function SignIn({ handleExit, authType }: any) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> & { target: HTMLFormElement }) => {
     event.preventDefault();
-    console.log(authType);
 
     const form: FormData = new FormData(event.target);
     if (form.get('username') && form.get('password')) {
@@ -51,7 +50,7 @@ export default function SignIn({ handleExit, authType }: any) {
         </div>
         <header className={styles.modalHeader}>
           <div>
-            <h3>Sign In or Sign Up</h3>
+            <h3>{(authType == 'signIn') ? 'Log In' : 'Sign Up'}</h3>
           </div>
         </header>
         <div className={styles.modalBody}>

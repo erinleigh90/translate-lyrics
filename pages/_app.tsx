@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="main-content">
         <Component {...pageProps} />
       </div>
-      {showSignIn ? <SignIn handleExit={handleCloseSignIn} /> : null}
+      {showSignIn ? <SignIn handleExit={handleCloseSignIn} authType={authAction} /> : null}
     </div>
   );
 }
