@@ -181,7 +181,13 @@
 }
 
 .headerDropDown div {
-  padding: 0px 8px;
+  padding: 0px 15px;
+  line-height: 2.25rem;
+  font-size: .95rem;
+}
+
+.headerDropDown div:first-child {
+  font-weight: bold;
 }
 
 .headerDropDown div:hover {

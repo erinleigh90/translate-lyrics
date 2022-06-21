@@ -31,8 +31,8 @@ export default function SiteHeader({ handleShowSignIn }: any) {
           <input className={styles.headerButton} type="submit" name="auth" value="Log In/Sign Up" onClick={handleOpenCloseDropDown} onBlur={handleCloseDropDown} />
           {showDropDown ?
             <div className={styles.headerDropDown}>
-              <div onMouseDown={handleSignUpSignIn} data-action="signIn">Log In</div>
               <div onMouseDown={handleSignUpSignIn} data-action="signUp">Sign Up</div>
+              <div onMouseDown={handleSignUpSignIn} data-action="signIn">Log In</div>
             </div>
             : null}
         </div>
