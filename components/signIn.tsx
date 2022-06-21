@@ -8,17 +8,18 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
   const [codeSent, setCodeSent] = useState(false);
 
   const handleChange = (event: any) => {
-    console.log(event.target.name, event.target.value)
     if (event.target.name == 'username') {
       setUsername(event.target.value);
     }
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement> | null) => {
+    let successProps: any;
+
     if (event == null) {
       try {
-        await signOut();
-        handleSuccess(null);
+        successProps = await signOut();
+        handleSuccess(successProps);
       } catch (e: any) {
         setAuthErrors(e.toString());
       }
@@ -30,28 +31,23 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
       const password: string = form.get('password') as string;
       const code: string = form.get('code') as string;
       const email: string = form.get('email') as string;
-      let user: any = null;
 
       try {
         switch (authType) {
           case 'signUp':
-            user = await signUp(username, password, email);
+            successProps = await signUp(username, password, email);
             break;
           case 'confirm':
-            await confirmEmail(username, code);
+            successProps = await confirmEmail(username, password, code);
             break;
           case 'signIn':
-            user = await signIn(username, password);
+            successProps = await signIn(username, password);
             break;
         }
-        let successProps = { currentUser: user, nextAction: '' };
-        if (authType == 'signUp') {
-          successProps.nextAction = 'confirm';
-        }
-        handleSuccess(user);
+        handleSuccess(successProps);
       } catch (e: any) {
         if (e.toString().indexOf('ConfirmUser') >= 0) {
-          handleSuccess({ user: null, nextAction: 'confirm' });
+          handleSuccess({ currentUser: null, nextAction: 'confirm' });
         } else {
           setAuthErrors(e.toString());
         }
@@ -80,7 +76,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
       break;
     case 'confirm':
       authLabel = 'Confirm Email';
-      inputs = ['Username', 'Code'];
+      inputs = ['Username', 'Password', 'Code'];
       greeting = 'Check your email for the confirmation code we sent to you so we can confirm your email address.';
       break;
     case 'signIn':
@@ -93,6 +89,13 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
       inputs = [];
       greeting = 'À bientôt!';
       handleSubmit(null);
+  }
+
+  const getResendCodeParagraph = () => {
+    if (!codeSent) {
+      return <p className={styles.center}>Can't find your confirmation code? <a onClick={handleResend}>Resend Code</a></p>;
+    }
+    return <p className={styles.center}>Code Sent!</p>;
   }
 
   return (
@@ -160,10 +163,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
                   required />
                 : null}
             </div>
-            {(authType == 'confirm') ?
-              <p>Can't find your confirmation code? <a onClick={handleResend}>Resend Code</a></p>
-              : null
-            }
+            {(authType == 'confirm') ? getResendCodeParagraph() : null}
             {(authType != 'signOut') ? <input className={styles.signInSubmit} type="submit" name="Sign In" /> : null}
           </form>
         </div>

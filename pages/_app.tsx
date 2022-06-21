@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
     if (nextAction) {
       setAuthAction(nextAction);
-    } else {
+    } else if (authAction != 'signOut') {
       setShowSignIn(false);
     }
   }

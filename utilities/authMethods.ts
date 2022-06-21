@@ -9,9 +9,10 @@ export async function signUp(username: string, password: string, email: string) 
         email
       }
     });
-    return user;
+    return { currentUser: user, nextAction: 'confirm' };
   } catch (e: any) {
     console.log('error signing up:', e);
+
     if (e.toString().indexOf('InvalidPasswordException: Password did not conform with policy: Password not long enough') >= 0) {
       throw 'Oops! That password isn\'t long enough.';
     } else if (e.toString().indexOf('UsernameExistsException') >= 0) {
@@ -20,16 +21,21 @@ export async function signUp(username: string, password: string, email: string) 
       throw 'Oops! Something went wrong, try a different username/password combination?';
     }
   }
-  return null;
 }
 
-export async function confirmEmail(username: string, code: string) {
+export async function confirmEmail(username: string, password: string, code: string) {
   try {
     await Auth.confirmSignUp(username, code);
-    return await Auth.currentAuthenticatedUser();
-  } catch (e) {
+    const user = await Auth.currentAuthenticatedUser();
+    return { currentUser: user };
+  } catch (e: any) {
     console.log('error confirming sign up', e);
-    throw 'That wasn\'t right. Please check your email and try again.';
+    if (e.toString().indexOf('The user is not authenticated') >= 0) {
+      const user = await signIn(username, password);
+      return { currentUser: user };
+    } else {
+      throw 'That wasn\'t right. Please check your email and try again.';
+    }
   }
 }
 
@@ -45,10 +51,10 @@ export async function resendConfirmationCode(username: string) {
 export async function signIn(username: string, password: string) {
   try {
     const user = await Auth.signIn(username, password);
-    return user;
+    return { currentUser: user };
   } catch (e: any) {
     if (e.toString().indexOf('UserNotConfirmedException') >= 0) {
-      throw 'ConfirmUser';
+      return { currentUser: null, nextAction: 'confirm' };
     } else {
       console.log('error signing in', e);
       throw 'Hmmmm, that didn\'t work. Try a different username or password.';
@@ -60,6 +66,7 @@ export async function signIn(username: string, password: string) {
 export async function signOut() {
   try {
     await Auth.signOut();
+    return { currentUser: null };
   } catch (e) {
     console.log('error signing out: ', e);
     throw 'Sign out failed, I guess you\'re stuck with us 🤷‍♀️';
