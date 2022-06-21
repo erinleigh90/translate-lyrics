@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const handleCloseSignIn = () => { setShowSignIn(false); }
   const handleAuthSuccess = ({ currentUser, nextAction }: any) => {
-    console.log(currentUser);
+    console.log('auth success user', currentUser);
     if (user != currentUser) {
       setUser(currentUser);
     }

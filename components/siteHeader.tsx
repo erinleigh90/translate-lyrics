@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css';
 
 export default function SiteHeader({ handleShowSignIn }: any) {
   const user = useContext(UserContext);
-  console.log(user);
+  console.log('header user', user);
   const [showDropDown, setShowDropDown] = useState(false);
 
   const handleOpenCloseDropDown = () => {

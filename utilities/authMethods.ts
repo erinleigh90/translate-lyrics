@@ -26,13 +26,10 @@ export async function signUp(username: string, password: string, email: string) 
 export async function confirmEmail(username: string, password: string, code: string) {
   try {
     await Auth.confirmSignUp(username, code);
-    const user = await Auth.currentAuthenticatedUser();
-    return { currentUser: user };
+    return await signIn(username, password);
   } catch (e: any) {
     console.log('error confirming sign up', e);
     if (e.toString().indexOf('The user is not authenticated') >= 0) {
-      const user = await signIn(username, password);
-      return { currentUser: user };
     } else {
       throw 'That wasn\'t right. Please check your email and try again.';
     }
@@ -60,7 +57,6 @@ export async function signIn(username: string, password: string) {
       throw 'Hmmmm, that didn\'t work. Try a different username or password.';
     }
   }
-  return null;
 }
 
 export async function signOut() {
