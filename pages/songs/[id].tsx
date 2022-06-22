@@ -34,7 +34,8 @@ export async function getStaticProps({ params }: any) {
   return {
     props: {
       song: data.getSong
-    }
+    },
+    revalidate: 60
   };
 }
 
