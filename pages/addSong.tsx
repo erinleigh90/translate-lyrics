@@ -35,12 +35,15 @@ export default function AddSong() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    const songId = songTitle.toLowerCase().replaceAll('[^\\p{L}\\p{Nd}]+', '-') + artistName.toLowerCase().replaceAll('[^\\p{L}\\p{Nd}]+', '-');
+
     try {
       const { data }: any = await API.graphql({
         authMode: 'AMAZON_COGNITO_USER_POOLS',
         query: createSong,
         variables: {
           input: {
+            id: songId,
             title: songTitle,
             lyrics: lyrics
           }
