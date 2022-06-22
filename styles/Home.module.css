@@ -155,20 +155,64 @@
   font-size: 1.25rem;
 }
 
-.headerButton {
+.headerInput {
   background-color: transparent;
   border: 1px solid #fff;
   color: #fff;
   border-radius: 25px;
-  padding: 0.75rem;
   font-weight: bold;
   text-decoration: none;
   font-size: .95rem;
-  cursor: pointer;
+  display: inline-flex;
 }
 
-.headerButton:hover {
+.headerInput:hover {
   box-shadow: 2px 5px 3px #2e2d2d;
+}
+
+.headerSearchBox {
+  background-color: white;
+}
+
+.headerInput input {
+  width: 100%;
+  margin: 0.75rem 0px;
+  font-size: 1.05rem;
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  border-right: 1px solid #9b9898;
+}
+
+.headerInput input:last-of-type {
+  border-right: none;
+}
+
+.headerInput input:focus,
+.headerInput input:focus-visible {
+  outline: none;
+}
+
+.searchButton {
+  background-color: #8a02b3;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 7px 7px 7px 0;
+}
+
+.searchButton svg {
+  display: block;
+  fill: none;
+  height: 12px;
+  width: 12px;
+  stroke: currentcolor;
+  stroke-width: 5.33333;
+  overflow: visible;
+}
+
+.headerButton {
+  padding: 0.75rem;
+  cursor: pointer;
 }
 
 .headerDropDownContainer {

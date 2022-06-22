@@ -49,8 +49,22 @@ export default function SiteHeader({ handleShowSignIn }: any) {
         <div className={styles.headerTitle}>
           <h3>Translate<span className={styles.brandColor_Primary}>Lyrics</span></h3>
         </div>
+        <div>
+          <div className={`${styles.headerInput} ${styles.headerSearchBox}`}>
+            <input type="text" name="song" placeholder="Song Title" />
+            <input type="text" name="artist" placeholder="Artist" />
+            <input type="text" name="album" placeholder="Album" />
+            <div className={styles.searchButton}>
+              <svg viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
+                <g fill="none">
+                  <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
         <div className={styles.userMenuDiv}>
-          <input className={styles.headerButton} type="submit" name="userMenu" value={getUserMenuLabel(user)} onClick={handleOpenCloseDropDown} onBlur={handleCloseDropDown} />
+          <input className={`${styles.headerInput} ${styles.headerButton}`} type="submit" name="userMenu" value={getUserMenuLabel(user)} onClick={handleOpenCloseDropDown} onBlur={handleCloseDropDown} />
           {showDropDown ?
             <div className={styles.headerDropDownContainer}>
               {(user != null) ? authenticatedUserMenu : unauthenticatedUserMenu}
