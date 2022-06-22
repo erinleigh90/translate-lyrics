@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
 
 import { Amplify, Auth } from 'aws-amplify';
@@ -36,7 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const handleCloseSignIn = () => { setShowSignIn(false); }
   const handleAuthSuccess = ({ currentUser, nextAction }: any) => {
-    console.log('auth success user', currentUser);
     if (user != currentUser) {
       setUser(currentUser);
     }
