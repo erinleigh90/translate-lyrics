@@ -7,7 +7,7 @@ export default function SubHeader() {
       <Link href="/addSong">
         <div className={styles.subHeaderButton}>
           <svg viewBox="0 0 100 100" aria-hidden="true" role="presentation" focusable="false">
-            <path d="M50 0 L50 100 M0 50 L100 50"></path>
+            <path d="M50 0 L50 100 M0 50 L100 50" stroke-linecap="round"></path>
           </svg>
           Add Song
         </div>
