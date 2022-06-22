@@ -1,11 +1,12 @@
 import styles from '../styles/Home.module.css';
 
 export default function SongCard({ song }: any) {
+
   return (
-    <div className={styles.card}>
-      <div>{song.title}</div>
-      <div>{song.artist.name}</div>
-      <div>{song.album.title}</div>
+    <div className={styles.card} key={song.id}>
+      <h3>{song.title}</h3>
+      <div className={styles.lyricsDiv}>{song.lyrics}</div>
+      <div>...</div>
     </div>
   );
 }

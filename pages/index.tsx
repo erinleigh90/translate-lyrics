@@ -17,6 +17,7 @@ export default function Home({ songs }: any) {
   const getSongComponents = () => {
     let songCards = [];
     for (let song of songs) {
+      console.log(song);
       songCards.push(SongCard({ song }));
     }
     return <div>{songCards}</div>;
