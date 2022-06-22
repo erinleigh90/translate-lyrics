@@ -24,7 +24,7 @@ export default function Home({ songs }: any) {
   }
 
   return (
-    <div className={styles.homeMainContent}>
+    <div>
       {(songs && songs.length > 0) ?
         getSongComponents()
         : <div>No Songs!</div>}
