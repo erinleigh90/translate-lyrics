@@ -9,11 +9,18 @@ export default function AddSong() {
   const newSongCard = (
     <div className={styles.card}>
       <h2>New Song</h2>
-      <form className={styles.inputFields}>
-        <input type="text" name="title" placeholder="Title" />
-        <input type="text" name="artist" placeholder="Artist" />
-        <input type="text" name="album" placeholder="Album" />
-        <input type="text" name="lyrics" placeholder="Lyrics" />
+      <form>
+        <div className={styles.inputFields}>
+          <input type="text" name="title" placeholder="Title" />
+          <input type="text" name="artist" placeholder="Artist" />
+          <input type="text" name="album" placeholder="Album" />
+        </div>
+        <div className={styles.lyricsParent}>
+          <textarea name="lyrics" placeholder="Lyrics" />
+        </div>
+        <div>
+          <input className={styles.primaryButton} type="submit" name="saveSong" value="Save" />
+        </div>
       </form>
     </div>
   );

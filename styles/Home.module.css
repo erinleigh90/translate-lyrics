@@ -82,7 +82,6 @@
   border: 1px solid #cfcbcb;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
   cursor: inherit;
 }
 
@@ -121,6 +120,45 @@
 .center {
   text-align: center;
 }
+
+.inputFields input[type="text"],
+.inputFields input[type="password"],
+.inputFields input[type="email"] {
+  width: 100%;
+  margin: 0px;
+  border: 1px solid #cfcbcb;
+  border-bottom: none;
+  padding: 0.75rem;
+  font-size: 1.05rem;
+}
+
+.inputFields input:only-child {
+  border-radius: 10px !important;
+}
+
+.inputFields input:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.inputFields input:last-child {
+  border-radius: 0px 0px 10px 10px;
+  border-bottom: 1px solid #cfcbcb;
+}
+
+.lyricsParent {
+  margin-top: 40px;
+}
+
+.lyricsParent textarea {
+  width: 100%;
+  margin: 0px;
+  border: 1px solid #cfcbcb;
+  padding: 0.75rem;
+  font-size: 1.05rem;
+  border-radius: 10px !important;
+  height: 300px;
+}
+
 
 .header {
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
@@ -343,33 +381,22 @@
   text-align: center;
 }
 
-.inputFields input[type="text"],
-.inputFields input[type="password"],
-.inputFields input[type="email"] {
-  width: 100%;
-  margin: 0px;
-  border: 1px solid #cfcbcb;
-  border-bottom: none;
-  padding: 0.75rem;
-  font-size: 1.05rem;
-}
-
-.inputFields input:only-child {
-  border-radius: 10px !important;
-}
-
-.inputFields input:first-child {
-  border-radius: 10px 10px 0px 0px;
-}
-
-.inputFields input:last-child {
-  border-radius: 0px 0px 10px 10px;
-  border-bottom: 1px solid #cfcbcb;
-}
-
-.signInSubmit {
+.primaryButton {
   border: none;
   background-color: #25d39d;
+  padding: 0.75rem;
+  width: 100%;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1.25rem;
+}
+
+.primaryButton:hover {
+  border: none;
+  background-color: #8a02b3;
   padding: 0.75rem;
   width: 100%;
   border-radius: 25px;

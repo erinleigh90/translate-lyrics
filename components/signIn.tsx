@@ -164,7 +164,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: any) {
                 : null}
             </div>
             {(authType == 'confirm') ? getResendCodeParagraph() : null}
-            {(authType != 'signOut') ? <input className={styles.signInSubmit} type="submit" name="Sign In" /> : null}
+            {(authType != 'signOut') ? <input className={styles.primaryButton} type="submit" name="Sign In" /> : null}
           </form>
         </div>
       </div>
