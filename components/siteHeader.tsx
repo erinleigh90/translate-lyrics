@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css';
 
 export default function SiteHeader({ handleShowSignIn }: any) {
   const user = useContext(UserContext);
+  const authenticated = (user != null);
   const [showDropDown, setShowDropDown] = useState(false);
 
   const handleOpenCloseDropDown = () => {
@@ -26,7 +27,7 @@ export default function SiteHeader({ handleShowSignIn }: any) {
   }
 
   const getUserMenuLabel = (user: any) => {
-    if (user != null) {
+    if (authenticated) {
       return `Hi ${user.username}!`;
     }
     return 'Log In / Sign Up';
@@ -70,12 +71,12 @@ export default function SiteHeader({ handleShowSignIn }: any) {
           <input className={`${styles.headerInput} ${styles.headerButton}`} type="submit" name="userMenu" value={getUserMenuLabel(user)} onClick={handleOpenCloseDropDown} onBlur={handleCloseDropDown} />
           {showDropDown ?
             <div className={styles.headerDropDownContainer}>
-              {(user != null) ? authenticatedUserMenu : unauthenticatedUserMenu}
+              {(authenticated) ? authenticatedUserMenu : unauthenticatedUserMenu}
             </div>
             : null}
         </div>
       </div>
-      <SubHeader />
+      {(authenticated) ? <SubHeader /> : null}
     </header>
   );
 }

@@ -17,7 +17,7 @@
   flex: 1;
   padding: 2rem 0;
   border-top: 1px solid #eaeaea;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -83,13 +83,7 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  cursor: inherit;
 }
 
 .card h2 {
@@ -219,7 +213,7 @@
 .headerDropDownContainer {
   box-sizing: border-box;
   position: absolute;
-  top: 60px;
+  top: 40px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
   min-width: 240px;
