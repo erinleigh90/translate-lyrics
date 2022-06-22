@@ -244,7 +244,7 @@
 }
 
 .subHeader {
-  background-color: #25d39d;
+  background-image: linear-gradient(to right, #24d39d, #1eb5ac);
   height: 80px;
   display: flex;
   justify-content: center;
