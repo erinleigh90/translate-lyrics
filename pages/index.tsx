@@ -1,6 +1,6 @@
 import { withSSRContext } from 'aws-amplify';
 import { listSongs } from '../src/graphql/queries';
-import SongCard from '../components/songCard';
+import SongCard from '../components/songCardLink';
 
 export async function getServerSideProps({ req }: any) {
   const SSR = withSSRContext({ req })
@@ -17,7 +17,6 @@ export default function Home({ songs }: any) {
   const getSongComponents = () => {
     let songCards = [];
     for (let song of songs) {
-      console.log(song);
       songCards.push(SongCard({ song }));
     }
     return <div>{songCards}</div>;

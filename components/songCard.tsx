@@ -1,15 +1,24 @@
-import Link from 'next/link';
+import { withSSRContext } from 'aws-amplify';
+import { getSong } from '../src/graphql/queries';
 import styles from '../styles/Home.module.css';
 
-export default function SongCard({ song }: any) {
+export async function getServerSideProps({ req }: any) {
+  const SSR = withSSRContext({ req })
+  const { data } = await SSR.API.graphql({ query: getSong });
 
+  return {
+    props: {
+      songs: data.listSongs.items
+    }
+  }
+}
+
+export default function SongCard({ song, compact = false }: any) {
   return (
-    <Link href={`/songs/${song.id}`}>
-      <div className={`${styles.card} ${styles.songCard}`} key={song.id}>
-        <h3>{song.title}</h3>
-        <div className={styles.lyricsDiv}>{song.lyrics}</div>
-        <div>...</div>
-      </div>
-    </Link>
+    <div className={styles.card} key={song.id}>
+      <h3>{song.title}</h3>
+      <div className={`${styles.lyricsDiv} ${(compact) ? styles.compact : null}`}>{song.lyrics}</div>
+      {(compact) ? <div>...</div> : null}
+    </div>
   );
 }
