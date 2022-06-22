@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../utilities/userContextMethods";
+import Link from 'next/link';
+import SubHeader from '../components/subHeader';
 import styles from '../styles/Home.module.css';
 
 export default function SiteHeader({ handleShowSignIn }: any) {
@@ -46,7 +48,9 @@ export default function SiteHeader({ handleShowSignIn }: any) {
     <header className={styles.header}>
       <div className={styles.headerDiv}>
         <div className={styles.headerTitle}>
-          <h3>Translate<span className={styles.brandColor_Primary}>Lyrics</span></h3>
+          <Link href="/">
+            <h3>Translate<span className={styles.brandColor_Primary}>Lyrics</span></h3>
+          </Link>
         </div>
         <div>
           <div className={`${styles.headerInput} ${styles.headerSearchBox}`}>
@@ -71,6 +75,7 @@ export default function SiteHeader({ handleShowSignIn }: any) {
             : null}
         </div>
       </div>
+      <SubHeader />
     </header>
   );
 }

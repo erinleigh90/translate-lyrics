@@ -134,7 +134,6 @@
   width: 100%;
   background-color: rgb(72, 72, 72);
   color: #fff;
-  height: 80px;
 }
 
 .headerDiv {
@@ -145,7 +144,7 @@
   line-height: 20px !important;
   box-sizing: border-box;
   align-items: center;
-  height: 100%;
+  height: 80px;
   position: relative;
   max-width: 90%;
   margin: 0 auto;
@@ -164,10 +163,6 @@
   text-decoration: none;
   font-size: .95rem;
   display: inline-flex;
-}
-
-.headerInput:hover {
-  box-shadow: 2px 5px 3px #2e2d2d;
 }
 
 .headerSearchBox {
@@ -215,6 +210,10 @@
   cursor: pointer;
 }
 
+.headerButton:hover {
+  box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
+}
+
 .headerDropDownContainer {
   box-sizing: border-box;
   position: absolute;
@@ -230,13 +229,14 @@
   padding: 8px 0;
   right: 0;
   color: rgb(72, 72, 72);
+  background-color: #fff;
 }
 
 .headerDropDown div {
   padding: 0px 15px;
   line-height: 2.25rem;
   font-size: .95rem;
-  cursor: pointer;
+  cursor: pointer
 }
 
 .headerDropDown div:first-child {
@@ -245,6 +245,37 @@
 
 .headerDropDown div:hover {
   background-color: rgb(235, 235, 235);
+}
+
+.subHeader {
+  background-color: #25d39d;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subHeaderButton {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  font-weight: bold;
+  font-size: .85rem;
+  cursor: pointer;
+}
+
+.subHeaderButton svg {
+  display: block;
+  height: 1.4rem;
+  width: 1.4rem;
+  stroke: currentcolor;
+  stroke-width: 10;
+  overflow: visible;
 }
 
 .modal {
