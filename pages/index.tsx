@@ -1,5 +1,4 @@
 import { withSSRContext } from 'aws-amplify';
-import styles from '../styles/Home.module.css';
 import { listSongs } from '../src/graphql/queries';
 import SongCard from '../components/songCard';
 
