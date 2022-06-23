@@ -1,9 +1,11 @@
 
 import { withSSRContext } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { getSong, listSongs } from '../../src/graphql/queries';
 
 import SongCard from '../../components/songCard';
+import EditSong from '../../components/editSong';
 import styles from '../../styles/Home.module.css';
 
 export async function getStaticPaths() {
@@ -47,7 +49,25 @@ export default function SongDetails({ song }: any) {
     );
   }
 
+  const [editMode, setEditMode] = useState(false);
+
+  const toggleEdit = () => {
+    setEditMode(!editMode);
+  };
+  const handleEditSuccess = () => {
+    setEditMode(false);
+  };
+
+
+  if (editMode) {
+    return (
+      <div>
+        <EditSong isNew={false} handleSuccess={handleEditSuccess} />
+      </div>
+    );
+  }
+
   return (
-    <SongCard song={song}></SongCard>
+    <SongCard song={song} toggleEdit={toggleEdit}></SongCard>
   );
 }
