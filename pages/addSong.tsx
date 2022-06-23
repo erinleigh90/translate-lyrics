@@ -15,7 +15,7 @@ export default function AddSong() {
 
   return (
     <div>
-      {(authenticated) ? <EditSong isNew={true} handleSuccess={handleSuccess} /> : <div>Oops! Please log in to add a song!</div>}
+      {(authenticated) ? <EditSong handleSuccess={handleSuccess} /> : <div>Oops! Please log in to add a song!</div>}
     </div>
   );
 }

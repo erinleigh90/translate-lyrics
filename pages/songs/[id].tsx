@@ -62,7 +62,7 @@ export default function SongDetails({ song }: any) {
   if (editMode) {
     return (
       <div>
-        <EditSong isNew={false} handleSuccess={handleEditSuccess} />
+        <EditSong song={song} handleSuccess={handleEditSuccess} />
       </div>
     );
   }

@@ -4,12 +4,12 @@ import { createSong } from '../src/graphql/mutations';
 
 import styles from '../styles/Home.module.css';
 
-export default function EditSong({ isNew, handleSuccess }: any) {
+export default function EditSong({ song, handleSuccess }: any) {
 
-  const [songTitle, setSongTitle] = useState('');
-  const [artistName, setArtistName] = useState('');
-  const [albumTitle, setAlbumTitle] = useState('');
-  const [lyrics, setLyrics] = useState('');
+  const [songTitle, setSongTitle] = useState((song) ? song.title : '');
+  const [artistName, setArtistName] = useState((song && song.artist) ? song.artist.name : '');
+  const [albumTitle, setAlbumTitle] = useState((song && song.album) ? song.album.title : '');
+  const [lyrics, setLyrics] = useState((song) ? song.lyrics : '');
 
   const handleUserInput = (event: any) => {
     const inputName = event.target.name;
@@ -56,15 +56,15 @@ export default function EditSong({ isNew, handleSuccess }: any) {
 
   return (
     <div className={styles.card}>
-      <h2>{(isNew) ? 'New Song' : 'Edit Song'}</h2>
+      <h2>{(song) ? 'Edit Song' : 'New Song'}</h2>
       <form onSubmit={handleSubmit}>
         <div className={styles.inputFields}>
-          <input type="text" name="title" placeholder="Title" onChange={handleUserInput} />
-          <input type="text" name="artist" placeholder="Artist" onChange={handleUserInput} />
-          <input type="text" name="album" placeholder="Album" onChange={handleUserInput} />
+          <input type="text" name="title" placeholder="Title" onChange={handleUserInput} value={songTitle} required />
+          <input type="text" name="artist" placeholder="Artist" onChange={handleUserInput} value={artistName} />
+          <input type="text" name="album" placeholder="Album" onChange={handleUserInput} value={albumTitle} />
         </div>
         <div className={styles.lyricsParent}>
-          <textarea name="lyrics" placeholder="Lyrics" onChange={handleUserInput} />
+          <textarea name="lyrics" placeholder="Lyrics" onChange={handleUserInput} value={lyrics} required />
         </div>
         <div>
           <input className={styles.primaryButton} type="submit" name="saveSong" value="Save" />
