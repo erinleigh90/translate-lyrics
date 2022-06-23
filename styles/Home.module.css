@@ -173,6 +173,7 @@
   background-color: rgb(72, 72, 72);
   color: #fff;
   top: 0;
+  z-index: 2;
 }
 
 .headerDiv {
@@ -447,6 +448,11 @@
   top: 24px;
   right: 24px;
   color: #828282;
+  cursor: pointer;
+}
+
+.cardEdit:hover {
+  color: #8a02b3;
 }
 
 .cardEdit svg {
