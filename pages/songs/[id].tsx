@@ -1,13 +1,10 @@
 
-import { Amplify, withSSRContext } from 'aws-amplify';
+import { withSSRContext } from 'aws-amplify';
 import { useRouter } from 'next/router';
-import awsExports from '../../src/aws-exports';
 import { getSong, listSongs } from '../../src/graphql/queries';
 
 import SongCard from '../../components/songCard';
 import styles from '../../styles/Home.module.css';
-
-Amplify.configure({ ...awsExports, ssr: true });
 
 export async function getStaticPaths() {
   const SSR = withSSRContext();

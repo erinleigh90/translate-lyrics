@@ -56,6 +56,12 @@
   font-size: 1.5rem;
 }
 
+.lightText {
+  font-size: .8rem;
+  font-weight: 200;
+  color: #7a7a7a;
+}
+
 .code {
   background: #fafafa;
   border-radius: 5px;
@@ -83,18 +89,13 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   cursor: inherit;
+  position: relative;
 }
 
 .card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
   text-align: center;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
 }
 
 .songLink {
@@ -438,4 +439,22 @@
 .lyricsDiv.compact {
   max-height: 15.5rem;
   overflow: hidden;
+}
+
+.cardEdit {
+  position: absolute;
+  display: flex;
+  top: 24px;
+  right: 24px;
+  color: #828282;
+}
+
+.cardEdit svg {
+  display: block;
+  height: 1.4rem;
+  width: 1.4rem;
+  stroke: currentcolor;
+  stroke-width: 8px;
+  overflow: visible;
+  fill: none;
 }
