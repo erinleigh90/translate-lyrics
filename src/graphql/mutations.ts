@@ -16,10 +16,14 @@ export const createArtist = /* GraphQL */ `
           title
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           artistAlbumsId
           owner
         }
         nextToken
+        startedAt
       }
       songs {
         items {
@@ -28,14 +32,21 @@ export const createArtist = /* GraphQL */ `
           lyrics
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           artistSongsId
           albumSongsId
           owner
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       owner
     }
   }
@@ -54,10 +65,14 @@ export const updateArtist = /* GraphQL */ `
           title
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           artistAlbumsId
           owner
         }
         nextToken
+        startedAt
       }
       songs {
         items {
@@ -66,14 +81,21 @@ export const updateArtist = /* GraphQL */ `
           lyrics
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           artistSongsId
           albumSongsId
           owner
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       owner
     }
   }
@@ -92,10 +114,14 @@ export const deleteArtist = /* GraphQL */ `
           title
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           artistAlbumsId
           owner
         }
         nextToken
+        startedAt
       }
       songs {
         items {
@@ -104,14 +130,21 @@ export const deleteArtist = /* GraphQL */ `
           lyrics
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           artistSongsId
           albumSongsId
           owner
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       owner
     }
   }
@@ -129,12 +162,17 @@ export const createAlbum = /* GraphQL */ `
         name
         albums {
           nextToken
+          startedAt
         }
         songs {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         owner
       }
       songs {
@@ -144,14 +182,21 @@ export const createAlbum = /* GraphQL */ `
           lyrics
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           artistSongsId
           albumSongsId
           owner
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       artistAlbumsId
       owner
     }
@@ -170,12 +215,17 @@ export const updateAlbum = /* GraphQL */ `
         name
         albums {
           nextToken
+          startedAt
         }
         songs {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         owner
       }
       songs {
@@ -185,14 +235,21 @@ export const updateAlbum = /* GraphQL */ `
           lyrics
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           artistSongsId
           albumSongsId
           owner
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       artistAlbumsId
       owner
     }
@@ -211,12 +268,17 @@ export const deleteAlbum = /* GraphQL */ `
         name
         albums {
           nextToken
+          startedAt
         }
         songs {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         owner
       }
       songs {
@@ -226,14 +288,21 @@ export const deleteAlbum = /* GraphQL */ `
           lyrics
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           artistSongsId
           albumSongsId
           owner
         }
         nextToken
+        startedAt
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       artistAlbumsId
       owner
     }
@@ -256,13 +325,20 @@ export const createSong = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           owner
         }
         songs {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         artistAlbumsId
         owner
       }
@@ -271,16 +347,24 @@ export const createSong = /* GraphQL */ `
         name
         albums {
           nextToken
+          startedAt
         }
         songs {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         owner
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       artistSongsId
       albumSongsId
       owner
@@ -304,13 +388,20 @@ export const updateSong = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           owner
         }
         songs {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         artistAlbumsId
         owner
       }
@@ -319,16 +410,24 @@ export const updateSong = /* GraphQL */ `
         name
         albums {
           nextToken
+          startedAt
         }
         songs {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         owner
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       artistSongsId
       albumSongsId
       owner
@@ -352,13 +451,20 @@ export const deleteSong = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           owner
         }
         songs {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         artistAlbumsId
         owner
       }
@@ -367,16 +473,24 @@ export const deleteSong = /* GraphQL */ `
         name
         albums {
           nextToken
+          startedAt
         }
         songs {
           nextToken
+          startedAt
         }
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         owner
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       artistSongsId
       albumSongsId
       owner
