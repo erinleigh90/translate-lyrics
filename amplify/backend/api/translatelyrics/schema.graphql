@@ -6,8 +6,8 @@ type Artist
   @auth(rules: [{ allow: public, operations: [read] }, { allow: owner }]) {
   id: ID!
   name: String!
-  albums: [Album] @hasMany
-  songs: [Song] @hasMany
+  albums: [Album] @hasMany(indexName: "byArtist", fields: ["id"])
+  songs: [Song] @hasMany(indexName: "byArtist", fields: ["id"])
 }
 
 type Album
@@ -15,8 +15,9 @@ type Album
   @auth(rules: [{ allow: public, operations: [read] }, { allow: owner }]) {
   id: ID!
   title: String!
-  artist: Artist @belongsTo
-  songs: [Song] @hasMany
+  artistId: ID @index(name: "byArtist", sortKeyFields: ["title"])
+  artist: Artist @belongsTo(fields: ["artistId"])
+  songs: [Song] @hasMany(indexName: "byAlbum", fields: ["id"])
 }
 
 type Song
@@ -25,6 +26,8 @@ type Song
   id: ID!
   title: String!
   lyrics: String!
-  album: Album @belongsTo
-  artist: Artist @belongsTo
+  albumId: ID @index(name: "byAlbum", sortKeyFields: ["title"])
+  album: Album @belongsTo(fields: ["albumId"])
+  artistId: ID @index(name: "byArtist", sortKeyFields: ["title"])
+  artist: Artist @belongsTo(fields: ["artistId"])
 }

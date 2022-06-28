@@ -28,7 +28,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "artistAlbumsId"
+                        "associatedWith": "artist"
                     }
                 },
                 "songs": {
@@ -42,7 +42,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "artistSongsId"
+                        "associatedWith": "artist"
                     }
                 },
                 "createdAt": {
@@ -123,7 +123,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "artistAlbumsId"
+                        "targetName": "artistId"
                     }
                 },
                 "songs": {
@@ -137,7 +137,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "albumSongsId"
+                        "associatedWith": "album"
                     }
                 },
                 "createdAt": {
@@ -163,6 +163,16 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byArtist",
+                        "fields": [
+                            "artistId",
+                            "title"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -225,7 +235,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "albumSongsId"
+                        "targetName": "albumId"
                     }
                 },
                 "artist": {
@@ -238,7 +248,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "artistSongsId"
+                        "targetName": "artistId"
                     }
                 },
                 "createdAt": {
@@ -264,6 +274,26 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byAlbum",
+                        "fields": [
+                            "albumId",
+                            "title"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byArtist",
+                        "fields": [
+                            "artistId",
+                            "title"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -295,5 +325,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "c19a40b460a3ec3d661325845e325e7c"
+    "version": "832055d33fb5757d9646d66a87441006"
 };

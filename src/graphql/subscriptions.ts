@@ -11,12 +11,12 @@ export const onCreateArtist = /* GraphQL */ `
         items {
           id
           title
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistAlbumsId
           owner
         }
         nextToken
@@ -27,13 +27,13 @@ export const onCreateArtist = /* GraphQL */ `
           id
           title
           lyrics
+          albumId
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistSongsId
-          albumSongsId
           owner
         }
         nextToken
@@ -57,12 +57,12 @@ export const onUpdateArtist = /* GraphQL */ `
         items {
           id
           title
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistAlbumsId
           owner
         }
         nextToken
@@ -73,13 +73,13 @@ export const onUpdateArtist = /* GraphQL */ `
           id
           title
           lyrics
+          albumId
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistSongsId
-          albumSongsId
           owner
         }
         nextToken
@@ -103,12 +103,12 @@ export const onDeleteArtist = /* GraphQL */ `
         items {
           id
           title
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistAlbumsId
           owner
         }
         nextToken
@@ -119,13 +119,13 @@ export const onDeleteArtist = /* GraphQL */ `
           id
           title
           lyrics
+          albumId
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistSongsId
-          albumSongsId
           owner
         }
         nextToken
@@ -145,6 +145,7 @@ export const onCreateAlbum = /* GraphQL */ `
     onCreateAlbum(owner: $owner) {
       id
       title
+      artistId
       artist {
         id
         name
@@ -168,13 +169,13 @@ export const onCreateAlbum = /* GraphQL */ `
           id
           title
           lyrics
+          albumId
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistSongsId
-          albumSongsId
           owner
         }
         nextToken
@@ -185,7 +186,6 @@ export const onCreateAlbum = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      artistAlbumsId
       owner
     }
   }
@@ -195,6 +195,7 @@ export const onUpdateAlbum = /* GraphQL */ `
     onUpdateAlbum(owner: $owner) {
       id
       title
+      artistId
       artist {
         id
         name
@@ -218,13 +219,13 @@ export const onUpdateAlbum = /* GraphQL */ `
           id
           title
           lyrics
+          albumId
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistSongsId
-          albumSongsId
           owner
         }
         nextToken
@@ -235,7 +236,6 @@ export const onUpdateAlbum = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      artistAlbumsId
       owner
     }
   }
@@ -245,6 +245,7 @@ export const onDeleteAlbum = /* GraphQL */ `
     onDeleteAlbum(owner: $owner) {
       id
       title
+      artistId
       artist {
         id
         name
@@ -268,13 +269,13 @@ export const onDeleteAlbum = /* GraphQL */ `
           id
           title
           lyrics
+          albumId
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistSongsId
-          albumSongsId
           owner
         }
         nextToken
@@ -285,7 +286,6 @@ export const onDeleteAlbum = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      artistAlbumsId
       owner
     }
   }
@@ -296,9 +296,11 @@ export const onCreateSong = /* GraphQL */ `
       id
       title
       lyrics
+      albumId
       album {
         id
         title
+        artistId
         artist {
           id
           name
@@ -318,9 +320,9 @@ export const onCreateSong = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        artistAlbumsId
         owner
       }
+      artistId
       artist {
         id
         name
@@ -344,8 +346,6 @@ export const onCreateSong = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      artistSongsId
-      albumSongsId
       owner
     }
   }
@@ -356,9 +356,11 @@ export const onUpdateSong = /* GraphQL */ `
       id
       title
       lyrics
+      albumId
       album {
         id
         title
+        artistId
         artist {
           id
           name
@@ -378,9 +380,9 @@ export const onUpdateSong = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        artistAlbumsId
         owner
       }
+      artistId
       artist {
         id
         name
@@ -404,8 +406,6 @@ export const onUpdateSong = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      artistSongsId
-      albumSongsId
       owner
     }
   }
@@ -416,9 +416,11 @@ export const onDeleteSong = /* GraphQL */ `
       id
       title
       lyrics
+      albumId
       album {
         id
         title
+        artistId
         artist {
           id
           name
@@ -438,9 +440,9 @@ export const onDeleteSong = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        artistAlbumsId
         owner
       }
+      artistId
       artist {
         id
         name
@@ -464,8 +466,6 @@ export const onDeleteSong = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      artistSongsId
-      albumSongsId
       owner
     }
   }

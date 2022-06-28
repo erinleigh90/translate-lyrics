@@ -11,12 +11,12 @@ export const getArtist = /* GraphQL */ `
         items {
           id
           title
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistAlbumsId
           owner
         }
         nextToken
@@ -27,13 +27,13 @@ export const getArtist = /* GraphQL */ `
           id
           title
           lyrics
+          albumId
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistSongsId
-          albumSongsId
           owner
         }
         nextToken
@@ -119,6 +119,7 @@ export const getAlbum = /* GraphQL */ `
     getAlbum(id: $id) {
       id
       title
+      artistId
       artist {
         id
         name
@@ -142,13 +143,13 @@ export const getAlbum = /* GraphQL */ `
           id
           title
           lyrics
+          albumId
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistSongsId
-          albumSongsId
           owner
         }
         nextToken
@@ -159,7 +160,6 @@ export const getAlbum = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      artistAlbumsId
       owner
     }
   }
@@ -174,6 +174,7 @@ export const listAlbums = /* GraphQL */ `
       items {
         id
         title
+        artistId
         artist {
           id
           name
@@ -193,7 +194,6 @@ export const listAlbums = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        artistAlbumsId
         owner
       }
       nextToken
@@ -217,6 +217,7 @@ export const syncAlbums = /* GraphQL */ `
       items {
         id
         title
+        artistId
         artist {
           id
           name
@@ -236,7 +237,6 @@ export const syncAlbums = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        artistAlbumsId
         owner
       }
       nextToken
@@ -250,9 +250,11 @@ export const getSong = /* GraphQL */ `
       id
       title
       lyrics
+      albumId
       album {
         id
         title
+        artistId
         artist {
           id
           name
@@ -272,9 +274,9 @@ export const getSong = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        artistAlbumsId
         owner
       }
+      artistId
       artist {
         id
         name
@@ -298,8 +300,6 @@ export const getSong = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      artistSongsId
-      albumSongsId
       owner
     }
   }
@@ -315,17 +315,19 @@ export const listSongs = /* GraphQL */ `
         id
         title
         lyrics
+        albumId
         album {
           id
           title
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistAlbumsId
           owner
         }
+        artistId
         artist {
           id
           name
@@ -341,8 +343,6 @@ export const listSongs = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        artistSongsId
-        albumSongsId
         owner
       }
       nextToken
@@ -367,17 +367,19 @@ export const syncSongs = /* GraphQL */ `
         id
         title
         lyrics
+        albumId
         album {
           id
           title
+          artistId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          artistAlbumsId
           owner
         }
+        artistId
         artist {
           id
           name
@@ -393,8 +395,6 @@ export const syncSongs = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        artistSongsId
-        albumSongsId
         owner
       }
       nextToken
