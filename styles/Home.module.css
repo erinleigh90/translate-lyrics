@@ -335,6 +335,7 @@
   box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
   overflow-y: scroll;
   --scrollbar-gutter: 0px;
+  z-index: 10;
 }
 
 .modalBackdrop {
@@ -343,6 +344,7 @@
   height: 100%;
   position: absolute;
   top: 0px;
+  z-index: 10;
 }
 
 .modalExit {
