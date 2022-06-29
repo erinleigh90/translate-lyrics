@@ -33,7 +33,7 @@ export async function insertAlbum(title: string, artistId: string | null = null)
       }
     });
 
-    return data.createSong;
+    return data.createAlbum;
   } catch(e: any) {
     console.error(...e.errors);
     throw new Error(e.errors[0].message);
