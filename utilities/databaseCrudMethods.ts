@@ -40,7 +40,7 @@ export async function insertAlbum(title: string, artistId: string | null = null)
   }
 }
 
-export async function insertSong(title: string, lyrics: string, artist: any = null, album: any = null) {
+export async function insertSong(title: string, lyrics: string, artistId: string | null = null, albumId: string | null = null) {
   try {
     const { data }: any = await API.graphql({
       authMode: 'AMAZON_COGNITO_USER_POOLS',
@@ -49,8 +49,8 @@ export async function insertSong(title: string, lyrics: string, artist: any = nu
         input: {
           title: title,
           lyrics: lyrics,
-          artistId: artist.id,
-          albumId: album.id
+          artistId: artistId,
+          albumId: albumId
         }
       }
     });
