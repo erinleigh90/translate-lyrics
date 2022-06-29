@@ -52,9 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <UserContext.Provider value={user}>
       <SiteHeader handleShowSignIn={handleShowSignIn} />
-      <div className={styles.main}>
-        <Component {...pageProps} />
-      </div>
+      <Component {...pageProps} />
       {showSignIn ? <SignIn handleExit={handleCloseSignIn} handleSuccess={handleAuthSuccess} authType={authAction} /> : null}
     </UserContext.Provider>
   );

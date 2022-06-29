@@ -3,12 +3,10 @@
 }
 
 .main {
-  min-height: 100vh;
   padding: 2rem 0;
-  flex: 1 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .footer {
@@ -89,6 +87,7 @@
   transition: color 0.15s ease, border-color 0.15s ease;
   cursor: inherit;
   position: relative;
+  max-width: 25rem;
 }
 
 .card h2 {
@@ -99,6 +98,8 @@
 
 .songLink {
   cursor: pointer;
+  flex: 1;
+  max-width: 27rem;
 }
 
 .logo {

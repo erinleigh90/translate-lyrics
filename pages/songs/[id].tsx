@@ -5,6 +5,7 @@ import { getSong, listSongs } from '../../src/graphql/queries';
 
 import SongCard from '../../components/songCard';
 import styles from '../../styles/Home.module.css';
+import { divide } from 'cypress/types/lodash';
 
 export async function getStaticPaths() {
   const SSR = withSSRContext();
@@ -49,6 +50,6 @@ export default function SongDetails({ song }: any) {
   }
 
   return (
-    <SongCard song={song}></SongCard>
+    <div className={styles.main}><SongCard song={song}></SongCard></div>
   );
 }
