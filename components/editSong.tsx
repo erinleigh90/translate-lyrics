@@ -1,11 +1,9 @@
-import { API } from 'aws-amplify';
 import { useState } from "react";
-import { createSong } from '../src/graphql/mutations';
+import { insertArtist, insertAlbum, insertSong } from '../utilities/databaseCrudMethods';
 
 import styles from '../styles/Home.module.css';
 
-export default function EditSong({ song, handleSuccess }: any) {
-
+export default function EditSong({ song, handleSuccess, allArtists, allAlbums }: any) {
   const [songTitle, setSongTitle] = useState((song) ? song.title : '');
   const [artistName, setArtistName] = useState((song && song.artist) ? song.artist.name : '');
   const [albumTitle, setAlbumTitle] = useState((song && song.album) ? song.album.title : '');
@@ -32,25 +30,46 @@ export default function EditSong({ song, handleSuccess }: any) {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const songId = songTitle.toLowerCase().replaceAll('[^\\p{L}\\p{Nd}]+', '-') + artistName.toLowerCase().replaceAll('[^\\p{L}\\p{Nd}]+', '-');
+    console.log(artistName, albumTitle, songTitle);
 
     try {
-      const { data }: any = await API.graphql({
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
-        query: createSong,
-        variables: {
-          input: {
-            id: songId,
-            title: songTitle,
-            lyrics: lyrics
-          }
-        }
-      });
+      let artistId:string | null = null;
+      let albumId:string | null = null;
 
-      handleSuccess(data.createSong.id);
+      if(artistName) {
+        console.log(allArtists);
+        let artistMatches: any = allArtists.filter((artist: any) => artist.name == artistName);
+        console.log(artistMatches);
+        let artist: any;
+        
+        if(!artistMatches || artistMatches.length == 0) {
+          artist = await insertArtist(artistName);
+          console.log(artist);
+        } else {
+          artist = artistMatches[0];
+        }
+        artistId = artist.id;
+      }
+
+      if(albumTitle) {
+        console.log(allAlbums);
+        let albumMatches: any = allAlbums.filter((album: any) => album.title == albumTitle);
+        console.log(albumMatches);
+        let album: any;
+        if(!albumMatches || albumMatches.length == 0) {
+          album = await insertAlbum(albumTitle, artistId);
+        } else {
+          album = albumMatches[0];
+        }
+        albumId = album.id;
+      }
+      let song:any = await insertSong(songTitle, lyrics, artistId, albumId);
+
+      handleSuccess(song.id);
     } catch (e: any) {
-      console.error(...e.errors);
-      throw new Error(e.errors[0].message);
+      console.log(e);
+      // console.error(...e.errors);
+      // throw new Error(e.errors[0].message);
     }
   }
 
