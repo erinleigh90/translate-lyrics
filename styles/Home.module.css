@@ -3,10 +3,11 @@
 }
 
 .main {
-  padding: 2rem 0;
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap:wrap;
 }
 
 .footer {
@@ -98,8 +99,8 @@
 
 .songLink {
   cursor: pointer;
-  flex: 1;
-  max-width: 27rem;
+  width: 27rem;
+  min-width: 27rem;
 }
 
 .logo {
@@ -407,8 +408,14 @@
   margin-top: 1.25rem;
 }
 
-.primaryButton:hover {
+.primaryButton:hover,
+.primaryButton:active {
   background-color: #8a02b3;
+}
+
+.primaryButton:focus-visible {
+  background-color: #009990;
+  outline:none;
 }
 
 .errorMessage {
