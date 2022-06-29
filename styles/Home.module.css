@@ -118,6 +118,10 @@
   color: #25d39d;
 }
 
+.brandColor_PrimaryDark {
+  color: #009990;
+}
+
 .brandColor_Secondary {
   color: #8a02b3;
 }
@@ -455,7 +459,7 @@
   display: flex;
   top: 24px;
   right: 24px;
-  color: #828282;
+  color: #009990;
   cursor: pointer;
 }
 
