@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { insertArtist, insertAlbum, insertSong } from '../utilities/databaseCrudMethods';
+import { insertArtist, insertAlbum, insertSong, editSong } from '../utilities/databaseCrudMethods';
 
 import styles from '../styles/Home.module.css';
 
@@ -37,9 +37,7 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
       let albumId:string | null = null;
 
       if(artistName) {
-        console.log(allArtists);
         let artistMatches: any = allArtists.filter((artist: any) => artist.name == artistName);
-        console.log(artistMatches);
         let artist: any;
         
         if(!artistMatches || artistMatches.length == 0) {
@@ -52,7 +50,6 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
       }
 
       if(albumTitle) {
-        console.log(allAlbums);
         let albumMatches: any = allAlbums.filter((album: any) => album.title == albumTitle);
         console.log(albumMatches);
         let album: any;
@@ -63,7 +60,12 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
         }
         albumId = album.id;
       }
-      let song:any = await insertSong(songTitle, lyrics, artistId, albumId);
+
+      if(song) {
+        song = await editSong(song.id, songTitle, lyrics, artistId, albumId);
+      } else {
+        song = await insertSong(songTitle, lyrics, artistId, albumId);
+      }
 
       handleSuccess(song.id);
     } catch (e: any) {

@@ -20,8 +20,8 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       song: songResults.data.getSong,
-      allArtists: artistResults.data.listArtists,
-      allAlbums: albumResults.data.listAlbums
+      allArtists: artistResults.data.listArtists.items,
+      allAlbums: albumResults.data.listAlbums.items
     }
   };
 }
