@@ -19,14 +19,16 @@ export default function SongCard({ song, compact = false }: any) {
   );
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${(compact) ? styles.compact : ''}`}>
       {(!compact && userIsOwner) ? editIcon : null}
-      <div className={styles.songInfo}>
-        <h3>{song.title}</h3>
-        {(song.artist) ? <div>{song.artist.name}</div> : null}
-        {(song.album) ? <div>{song.album.title}</div> : null}
+      <div className={styles.songDetails}>
+        <div className={styles.songInfo}>
+          <h3>{song.title}</h3>
+          {(song.artist) ? <div>{song.artist.name}</div> : null}
+          {(song.album) ? <div>{song.album.title}</div> : null}
+        </div>
+        <div className={styles.lyricsDiv}>{song.lyrics}</div>
       </div>
-      <div className={`${styles.lyricsDiv} ${(compact) ? styles.compact : ''}`}>{song.lyrics}</div>
       {(compact) ? <div>...</div> : null}
       <p className={styles.lightText}>Added by {song.owner}</p>
     </div>
