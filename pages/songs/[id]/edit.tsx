@@ -7,20 +7,20 @@ import { getSong, listArtists, listAlbums } from '../../../src/graphql/queries';
 export async function getServerSideProps(context: any) {
   const SSR = withSSRContext(context);
   
-  const { songData } = await SSR.API.graphql({
+  const songResults = await SSR.API.graphql({
     query: getSong,
     variables: {
       id: context.params.id
     }
   });
-  const {artistData} = await SSR.API.graphql({ query: listArtists });
-  const {albumData} = await SSR.API.graphql({ query: listAlbums });
+  const artistResults = await SSR.API.graphql({ query: listArtists });
+  const albumResults = await SSR.API.graphql({ query: listAlbums });
 
   return {
     props: {
-      song: songData.getSong,
-      allArtists: artistData.listArtists,
-      allAlbums: albumData.listAlbums
+      song: songResults.data.getSong,
+      allArtists: artistResults.data.listArtists,
+      allAlbums: albumResults.data.listAlbums
     }
   };
 }
