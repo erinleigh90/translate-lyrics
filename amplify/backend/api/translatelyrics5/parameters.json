@@ -1,12 +1,11 @@
 {
-  "AppSyncApiName": "translatelyrics",
+  "AppSyncApiName": "translatelyrics5",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
-      "authtranslatelyricscfe2e618",
+      "authtranslatelyrics59d95a0b6",
       "Outputs.UserPoolId"
     ]
-  },
-  "AuthModeLastUpdated": "2022-06-27T22:40:52.697Z"
+  }
 }
