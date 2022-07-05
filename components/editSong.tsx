@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { insertArtist, insertAlbum, insertSong, editSong } from '../utilities/databaseCrudMethods';
+import { DataStore } from 'aws-amplify';
+import { Song, Artist, Album } from '../src/models/index';
+import { insertAlbum, insertSong, editSong } from '../utilities/databaseCrudMethods';
 
 import styles from '../styles/Home.module.css';
 
-export default function EditSong({ song, handleSuccess, allArtists, allAlbums }: any) {
+type EditParams = {
+  song: Song,
+  handleSuccess: Function,
+  allArtists: [Artist],
+  allAlbums: [Album]  
+}
+
+export default function EditSong({ song, handleSuccess, allArtists, allAlbums }: EditParams) {
   const [songTitle, setSongTitle] = useState((song) ? song.title : '');
   const [artistName, setArtistName] = useState((song && song.artist) ? song.artist.name : '');
   const [albumTitle, setAlbumTitle] = useState((song && song.album) ? song.album.title : '');
@@ -33,41 +42,44 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
     console.log(artistName, albumTitle, songTitle);
 
     try {
-      let artistId:string | null = null;
-      let albumId:string | null = null;
+      let artist: Artist | null = null;
+      let album: Album | null = null;
 
       if(artistName) {
-        let artistMatches: any = allArtists.filter((artist: any) => artist.name == artistName);
-        let artist: any;
+        let artistMatches: Artist[] = allArtists.filter((artist: any) => artist.name == artistName);
         
-        if(!artistMatches || artistMatches.length == 0) {
-          artist = await insertArtist(artistName);
+        if(artistMatches.length == 0) {
+          artist = await DataStore.save(new Artist({name: artistName}));
           console.log(artist);
         } else {
           artist = artistMatches[0];
         }
-        artistId = artist.id;
       }
 
       if(albumTitle) {
-        let albumMatches: any = allAlbums.filter((album: any) => album.title == albumTitle);
-        console.log(albumMatches);
-        let album: any;
-        if(!albumMatches || albumMatches.length == 0) {
-          album = await insertAlbum(albumTitle, artistId);
+        let albumMatches: Album[] = allAlbums.filter((album: any) => album.title == albumTitle);
+
+        if(albumMatches.length == 0) {
+          album = await DataStore.save(new Album({title: albumTitle, artist: artist}));
+          console.log(album);
         } else {
           album = albumMatches[0];
         }
-        albumId = album.id;
       }
 
       if(song) {
-        song = await editSong(song.id, songTitle, lyrics, artistId, albumId);
+        song = await DataStore.save(Song.copyOf(song, updated => {
+          updated.title = songTitle;
+          updated.lyrics = lyrics;
+          updated.artist = artist;
+          updated.album = album;
+        }));
       } else {
-        song = await insertSong(songTitle, lyrics, artistId, albumId);
+        song = await DataStore.save(new Song({title: songTitle, lyrics: lyrics, artist: artist, album: album}));
+        console.log(song);
       }
 
-      handleSuccess(song.id);
+      //handleSuccess(song.id);
     } catch (e: any) {
       console.log(e);
       // console.error(...e.errors);

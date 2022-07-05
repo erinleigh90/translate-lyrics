@@ -2,31 +2,29 @@ import { withSSRContext } from 'aws-amplify';
 import { useContext } from "react";
 import { UserContext } from "../../../utilities/userContextMethods";
 import EditSong from '../../../components/editSong';
+import { Song, Artist, Album } from '../../../src/models/index';
+import { serializeModel } from '@aws-amplify/datastore/ssr';
 import { getSong, listArtists, listAlbums } from '../../../src/graphql/queries';
 import styles from '../../../styles/Home.module.css';
 
 export async function getServerSideProps(context: any) {
   const SSR = withSSRContext(context);
   
-  const songResults = await SSR.API.graphql({
-    query: getSong,
-    variables: {
-      id: context.params.id
-    }
-  });
-  const artistResults = await SSR.API.graphql({ query: listArtists });
-  const albumResults = await SSR.API.graphql({ query: listAlbums });
+  const song = await SSR.DataStore.query(Song, context.params.id);
+  const artists = await SSR.DataStore.query(Artist);
+  const albums = await SSR.DataStore.query(Album);
 
   return {
     props: {
-      song: songResults.data.getSong,
-      allArtists: artistResults.data.listArtists.items,
-      allAlbums: albumResults.data.listAlbums.items
+      song: serializeModel(song),
+      allArtists: serializeModel(artists),
+      allAlbums: serializeModel(albums)
     }
   };
 }
 
 export default function Edit({song, allArtists, allAlbums}: any) {
+  console.log(song, allArtists, allAlbums);
   const user = useContext(UserContext);
   const authenticated = (user != null);
 

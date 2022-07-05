@@ -9,8 +9,7 @@ import { UserContext } from '../utilities/userContextMethods';
 import SiteHeader from '../components/siteHeader';
 import SignIn from '../components/signIn';
 
-import styles from '../styles/Home.module.css';
-
+Amplify.Logger.LOG_LEVEL = 'DEBUG';
 Amplify.configure({ ...awsExports, ssr: true });
 
 export default function App({ Component, pageProps }: AppProps) {

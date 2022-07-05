@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../utilities/userContextMethods";
 import Link from 'next/link';
 import SubHeader from '../components/subHeader';
+import HeaderSearch from '../components/headerSearch';
 import styles from '../styles/Home.module.css';
 
 export default function SiteHeader({ handleShowSignIn }: any) {
@@ -54,18 +55,7 @@ export default function SiteHeader({ handleShowSignIn }: any) {
           </Link>
         </div>
         <div>
-          <div className={`${styles.headerInput} ${styles.headerSearchBox}`}>
-            <input type="text" name="song" placeholder="Song Title" />
-            <input type="text" name="artist" placeholder="Artist" />
-            <input type="text" name="album" placeholder="Album" />
-            <div className={styles.searchButton}>
-              <svg viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
-                <g fill="none">
-                  <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
+          <HeaderSearch/>
         </div>
         <div className={styles.userMenuDiv}>
           <input className={`${styles.headerInput} ${styles.headerButton}`} type="submit" name="userMenu" value={getUserMenuLabel(user)} onClick={handleOpenCloseDropDown} onBlur={handleCloseDropDown} />

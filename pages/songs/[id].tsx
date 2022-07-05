@@ -1,6 +1,8 @@
 
 import { withSSRContext } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import { Song } from '../../src/models/index';
+import { serializeModel } from '@aws-amplify/datastore/ssr';
 import { getSong, listSongs } from '../../src/graphql/queries';
 
 import SongCard from '../../components/songCard';
@@ -8,8 +10,8 @@ import styles from '../../styles/Home.module.css';
 
 export async function getStaticPaths() {
   const SSR = withSSRContext();
-  const { data } = await SSR.API.graphql({ query: listSongs });
-  const paths = data.listSongs.items.map((song: any) => ({
+  const songs = await SSR.DataStore.query(Song);
+  const paths = songs.map((song: any) => ({
     params: { id: song.id }
   }));
 
@@ -21,18 +23,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   const SSR = withSSRContext();
-  const { data } = await SSR.API.graphql({
-    query: getSong,
-    variables: {
-      id: params.id
-    }
-  });
+  
+  const song = await SSR.DataStore.query(Song, params.id);
 
   return {
     props: {
-      song: data.getSong
-    },
-    revalidate: 60
+      song: serializeModel(song)
+    }
   };
 }
 
