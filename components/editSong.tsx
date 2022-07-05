@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { DataStore } from 'aws-amplify';
 import { Song, Artist, Album } from '../src/models/index';
-import { insertAlbum, insertSong, editSong } from '../utilities/databaseCrudMethods';
 
 import styles from '../styles/Home.module.css';
 
