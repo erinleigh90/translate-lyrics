@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DataStore } from '@aws-amplify/datastore';
+import { DataStore } from 'aws-amplify';
 import { Song, Artist, Album } from '../src/models/index';
 import styles from '../styles/Home.module.css';
 
