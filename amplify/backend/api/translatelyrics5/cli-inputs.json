@@ -1,19 +1,17 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "translatelyrics",
+    "apiName": "translatelyrics5",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/erinleig/Repositories/translate-lyrics/amplify/backend/api/translatelyrics/schema.graphql",
+    "gqlSchemaPath": "/Volumes/workplace/translate-lyrics/amplify/backend/api/translatelyrics5/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 365,
-      "apiKeyExpirationDate": "2023-06-27T22:40:46.068Z",
-      "keyDescription": "LyricsAPIKey"
+      "expirationTime": 7
     },
     "additionalAuthTypes": [
       {
         "mode": "AMAZON_COGNITO_USER_POOLS",
-        "cognitoUserPoolId": "authtranslatelyricscfe2e618"
+        "cognitoUserPoolId": "authtranslatelyrics59d95a0b6"
       }
     ],
     "conflictResolution": {

@@ -1,21 +1,21 @@
+import { withSSRContext } from "aws-amplify";
+import { useRouter } from "next/router";
+import { getSong, listSongs } from "../../src/graphql/queries";
 
-import { withSSRContext } from 'aws-amplify';
-import { useRouter } from 'next/router';
-import { getSong, listSongs } from '../../src/graphql/queries';
-
-import SongCard from '../../components/songCard';
-import styles from '../../styles/Home.module.css';
+import SongCard from "../../components/songCard";
+import styles from "../../styles/Home.module.css";
 
 export async function getStaticPaths() {
   const SSR = withSSRContext();
   const { data } = await SSR.API.graphql({ query: listSongs });
+  console.log("API query", data);
   const paths = data.listSongs.items.map((song: any) => ({
-    params: { id: song.id }
+    params: { id: song.id },
   }));
 
   return {
     fallback: true,
-    paths
+    paths,
   };
 }
 
@@ -24,15 +24,15 @@ export async function getStaticProps({ params }: any) {
   const { data } = await SSR.API.graphql({
     query: getSong,
     variables: {
-      id: params.id
-    }
+      id: params.id,
+    },
   });
-
+  console.log("API query", data);
   return {
     props: {
-      song: data.getSong
+      song: data.getSong,
     },
-    revalidate: 60
+    revalidate: 60,
   };
 }
 
@@ -49,6 +49,8 @@ export default function SongDetails({ song }: any) {
   }
 
   return (
-    <div className={styles.main}><SongCard song={song}></SongCard></div>
+    <div className={styles.main}>
+      <SongCard song={song}></SongCard>
+    </div>
   );
 }
