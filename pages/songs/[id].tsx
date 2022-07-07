@@ -39,8 +39,6 @@ export async function getStaticProps({ params }: any) {
 }
 
 export default function SongDetails({ song }: SongDetailsParams) {
-  Predictions.removePluggable('AmazonAIPredictionsProvider');
-  Predictions.addPluggable(new AmazonAIPredictionsProvider());
   const router = useRouter();
 
   if (router.isFallback) {
@@ -50,6 +48,10 @@ export default function SongDetails({ song }: SongDetailsParams) {
       </div>
     );
   }
+  Predictions.removePluggable('AmazonAIPredictionsProvider');
+  Predictions.addPluggable(new AmazonAIPredictionsProvider());
+  const [translatedLyrics, setTranslatedLyrics] = useState('');
+  const [translatedSong, setTranslatedSong] = useState({...song});
 
   const translate = async () => {
     try {
@@ -64,18 +66,26 @@ export default function SongDetails({ song }: SongDetailsParams) {
         }
       });
       console.log(translationResult);
+      const newTranslation = new Song({ title: song.title, album: song.album, artist: song.artist, lyrics: translationResult.text, owner: song.owner });
+      setTranslatedSong(newTranslation);
     } catch (e: any) {
       console.log(e);
     }
   }
 
-  const [translatedLyrics, setTranslatedLyrics] = useState('');
 
   useEffect(() => {
     translate();
   }, []);
 
   return (
-    <div className={styles.main}><SongCard song={song}></SongCard></div>
+    <div className={styles.main}>
+      <div>
+        <SongCard song={song}></SongCard>
+      </div>
+      <div>
+        <SongCard song={translatedSong} allowEdit={false}></SongCard>
+      </div>
+    </div>
   );
 }

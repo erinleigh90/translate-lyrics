@@ -8,9 +8,10 @@ import styles from '../styles/Home.module.css';
 type SongCardParams = {
   song: Song
   compact?: boolean
+  allowEdit?: boolean
 }
 
-export default function SongCard({ song, compact = false }: SongCardParams) {
+export default function SongCard({ song, compact = false, allowEdit = true }: SongCardParams) {
   const user: any = useContext(UserContext);
   const userIsOwner = (user != null) ? user.username == song.owner : false;
 
@@ -26,7 +27,7 @@ export default function SongCard({ song, compact = false }: SongCardParams) {
 
   return (
     <div className={`${styles.card} ${(compact) ? styles.compact : ''}`}>
-      {(!compact && userIsOwner) ? editIcon : null}
+      {(allowEdit && userIsOwner) ? editIcon : null}
       <div className={styles.songDetails}>
         <div className={styles.songInfo}>
           <h3>{song.title}</h3>
