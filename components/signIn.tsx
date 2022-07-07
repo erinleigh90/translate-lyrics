@@ -1,15 +1,21 @@
 import { signUp, confirmEmail, signIn, signOut, resendConfirmationCode } from '../utilities/authMethods';
 import styles from '../styles/Home.module.css';
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
-export default function SignIn({ handleExit, handleSuccess, authType }: any) {
+type SignInParams = {
+  handleExit: MouseEventHandler
+  handleSuccess: Function
+  authType: string
+}
+
+export default function SignIn({ handleExit, handleSuccess, authType }: SignInParams) {
   const [authErrors, setAuthErrors] = useState('');
   const [username, setUsername] = useState('');
   const [codeSent, setCodeSent] = useState(false);
 
-  const handleChange = (event: any) => {
-    if (event.target.name == 'username') {
-      setUsername(event.target.value);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.currentTarget.name == 'username') {
+      setUsername(event.currentTarget.value);
     }
   }
 

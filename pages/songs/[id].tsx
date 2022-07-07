@@ -3,10 +3,13 @@ import { withSSRContext } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { Song } from '../../src/models/index';
 import { serializeModel } from '@aws-amplify/datastore/ssr';
-import { getSong, listSongs } from '../../src/graphql/queries';
 
 import SongCard from '../../components/songCard';
 import styles from '../../styles/Home.module.css';
+
+type SongDetailsParams = {
+  song: Song
+}
 
 export async function getStaticPaths() {
   const SSR = withSSRContext();
@@ -33,8 +36,7 @@ export async function getStaticProps({ params }: any) {
   };
 }
 
-export default function SongDetails({ song }: any) {
-  console.log(song);
+export default function SongDetails({ song }: SongDetailsParams) {
   const router = useRouter();
 
   if (router.isFallback) {

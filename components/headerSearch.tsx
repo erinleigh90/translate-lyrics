@@ -8,20 +8,29 @@ export default function HeaderSearch() {
   const [artistName, setArtistName] = useState('');
   const [albumTitle, setAlbumTitle] = useState('');
 
-  const handleInput = (event: any) => {
-    setSongTitle(event.value);
+  const handleInput = (event: React.SyntheticEvent<HTMLInputElement>) => {
+    switch (event.currentTarget.name) { 
+      case "song":
+        setSongTitle(event.currentTarget.value);
+        break;
+      case "artist":
+        setArtistName(event.currentTarget.value);
+        break;
+      case "album":
+        setAlbumTitle(event.currentTarget.value);
+    }
   }
   
   const handleSearch = async () => {
     const songs = await DataStore.query(Song);
-    console.log('ALLTHESONGS: ', songs);
+    console.log('ALL SONGS: ', songs);
   }
 
   return (
     <div className={`${styles.headerInput} ${styles.headerSearchBox}`}>
       <input type="text" name="song" placeholder="Song Title" onChange={handleInput}/>
-      <input type="text" name="artist" placeholder="Artist" />
-      <input type="text" name="album" placeholder="Album" />
+      <input type="text" name="artist" placeholder="Artist" onChange={handleInput}/>
+      <input type="text" name="album" placeholder="Album" onChange={handleInput}/>
       <div className={styles.searchButton} onClick={handleSearch}>
         <svg viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false">
           <g fill="none">

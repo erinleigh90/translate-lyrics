@@ -4,39 +4,39 @@ import { Song, Artist, Album } from '../src/models';
 
 import styles from '../styles/Home.module.css';
 
-type EditParams = {
+type EditComponentParams = {
   song?: Song,
   handleSuccess: Function,
   allArtists: [Artist],
   allAlbums: [Album]  
 }
 
-export default function EditSong({ song, handleSuccess, allArtists, allAlbums }: EditParams) {
+export default function EditSong({ song, handleSuccess, allArtists, allAlbums }: EditComponentParams) {
   const [songTitle, setSongTitle] = useState((song) ? song.title : '');
   const [artistName, setArtistName] = useState((song && song.artist) ? song.artist.name : '');
   const [albumTitle, setAlbumTitle] = useState((song && song.album) ? song.album.title : '');
   const [lyrics, setLyrics] = useState((song) ? song.lyrics : '');
 
-  const handleUserInput = (event: any) => {
-    const inputName = event.target.name;
+  const handleUserInput = (event: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const inputName = event.currentTarget.name;
 
     switch (inputName) {
       case 'title':
-        setSongTitle(event.target.value);
+        setSongTitle(event.currentTarget.value);
         break;
       case 'artist':
-        setArtistName(event.target.value);
+        setArtistName(event.currentTarget.value);
         break;
       case 'album':
-        setAlbumTitle(event.target.value);
+        setAlbumTitle(event.currentTarget.value);
         break;
       case 'lyrics':
-        setLyrics(event.target.value);
+        setLyrics(event.currentTarget.value);
         break;
     }
   }
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(artistName, albumTitle, songTitle);
 
@@ -49,7 +49,6 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
         
         if(artistMatches.length == 0) {
           artist = await DataStore.save(new Artist({name: artistName}));
-          console.log(artist);
         } else {
           artist = artistMatches[0];
         }
@@ -60,7 +59,6 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
 
         if(albumMatches.length == 0) {
           album = await DataStore.save(new Album({title: albumTitle, artist: artist}));
-          console.log(album);
         } else {
           album = albumMatches[0];
         }
@@ -75,7 +73,6 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
         }));
       } else {
         song = await DataStore.save(new Song({title: songTitle, lyrics: lyrics, artist: artist, album: album}));
-        console.log(song);
       }
 
       handleSuccess(song.id);

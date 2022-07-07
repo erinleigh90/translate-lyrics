@@ -6,12 +6,18 @@ import { Song, Artist, Album } from '../../../src/models';
 import { serializeModel } from '@aws-amplify/datastore/ssr';
 import styles from '../../../styles/Home.module.css';
 
+type EditParams = {
+  song: Song
+  allArtists: [Artist]
+  allAlbums: [Album]
+}
+
 export async function getServerSideProps(context: any) {
   const SSR = withSSRContext(context);
   
-  const song = await SSR.DataStore.query(Song, context.params.id);
-  const artists = await SSR.DataStore.query(Artist);
-  const albums = await SSR.DataStore.query(Album);
+  const song: Song = await SSR.DataStore.query(Song, context.params.id);
+  const artists: [Artist] = await SSR.DataStore.query(Artist);
+  const albums: [Album] = await SSR.DataStore.query(Album);
 
   return {
     props: {
@@ -22,8 +28,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default function Edit({song, allArtists, allAlbums}: any) {
-  console.log(song, allArtists, allAlbums);
+export default function Edit({song, allArtists, allAlbums}: EditParams) {
   const user = useContext(UserContext);
   const authenticated = (user != null);
 

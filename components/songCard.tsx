@@ -1,10 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Link from 'next/link';
+import { Song } from '../src/models';
 import { UserContext } from "../utilities/userContextMethods";
 
 import styles from '../styles/Home.module.css';
 
-export default function SongCard({ song, compact = false }: any) {
+type SongCardParams = {
+  song: Song,
+  compact?: Boolean
+}
+
+export default function SongCard({ song, compact = false }: SongCardParams) {
   const user: any = useContext(UserContext);
   const userIsOwner = (user != null) ? user.username == song.owner : false;
 

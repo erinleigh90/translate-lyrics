@@ -5,7 +5,11 @@ import SubHeader from '../components/subHeader';
 import HeaderSearch from '../components/headerSearch';
 import styles from '../styles/Home.module.css';
 
-export default function SiteHeader({ handleShowSignIn }: any) {
+type SiteHeaderParams = {
+  handleShowSignIn: Function
+}
+
+export default function SiteHeader({ handleShowSignIn }: SiteHeaderParams) {
   const user = useContext(UserContext);
   const authenticated = (user != null);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -22,9 +26,11 @@ export default function SiteHeader({ handleShowSignIn }: any) {
     setShowDropDown(false);
   }
 
-  const handleSignUpSignIn = (event: any) => {
-    const actionType: string = event.target.dataset.action;
-    handleShowSignIn(actionType);
+  const handleSignUpSignIn = (event: React.MouseEvent<HTMLDivElement>) => {
+    const actionType: string | undefined = event.currentTarget.dataset.action;
+    if (actionType) {
+      handleShowSignIn(actionType);
+    }
   }
 
   const getUserMenuLabel = (user: any) => {
