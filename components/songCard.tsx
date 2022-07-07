@@ -6,7 +6,7 @@ import { UserContext } from "../utilities/userContextMethods";
 import styles from '../styles/Home.module.css';
 
 type SongCardParams = {
-  song: Song
+  song: Song & {owner?: string}
   compact?: boolean
   allowEdit?: boolean
 }

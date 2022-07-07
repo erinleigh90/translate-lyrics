@@ -7,7 +7,7 @@ import SongCard from './songCard';
 import styles from '../styles/Home.module.css';
 
 type SongDetailsParams = {
-  song: Song
+  song: Song & { owner?: string }
 }
 
 export default function SongDetails({ song }: SongDetailsParams) {
@@ -55,14 +55,14 @@ export default function SongDetails({ song }: SongDetailsParams) {
         album = new Album({ title: albumTranslation.text });
       }
       
-      const newTranslation = new Song({ title: titleTranslation.text, lyrics: lyricsTranslation.text, artist: song.artist, album: album, owner: song.owner });
+      const newTranslation = new Song({ title: titleTranslation.text, lyrics: lyricsTranslation.text, artist: song.artist, album: album });
       setTranslatedSong(newTranslation);
       setShowTranslation(true);
     } catch (e: any) {
       console.log(e);
     }
   }
-  
+
   useEffect(() => {
     translate('fr', 'en');
   }, []);

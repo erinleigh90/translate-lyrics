@@ -46,7 +46,6 @@ export declare class Song {
   readonly artist?: Artist | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly owner?: string | null;
   constructor(init: ModelInit<Song, SongMetaData>);
   static copyOf(source: Song, mutator: (draft: MutableModel<Song, SongMetaData>) => MutableModel<Song, SongMetaData> | void): Song;
 }
