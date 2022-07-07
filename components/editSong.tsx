@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DataStore } from 'aws-amplify';
+import { deserializeModel } from '@aws-amplify/datastore/ssr';
 import { Song, Artist, Album } from '../src/models';
 
 import styles from '../styles/Home.module.css';
@@ -12,6 +13,9 @@ type EditComponentParams = {
 }
 
 export default function EditSong({ song, handleSuccess, allArtists, allAlbums }: EditComponentParams) {
+  if (song) {
+    song = deserializeModel(Song, song);
+  }
   const [songTitle, setSongTitle] = useState((song) ? song.title : '');
   const [artistName, setArtistName] = useState((song && song.artist) ? song.artist.name : '');
   const [albumTitle, setAlbumTitle] = useState((song && song.album) ? song.album.title : '');
