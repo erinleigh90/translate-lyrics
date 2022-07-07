@@ -25,7 +25,7 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default function AddSong({allArtists, allAlbums}: AddSongParams) {
+export default function AddSong({ allArtists, allAlbums }: AddSongParams) {
   const user = useContext(UserContext);
   const authenticated = (user != null);
 

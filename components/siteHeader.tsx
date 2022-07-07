@@ -72,7 +72,7 @@ export default function SiteHeader({ handleShowSignIn }: SiteHeaderParams) {
             : null}
         </div>
       </div>
-      {(authenticated) ? <SubHeader /> : null}
+      <SubHeader />
     </header>
   );
 }

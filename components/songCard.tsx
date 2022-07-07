@@ -37,7 +37,7 @@ export default function SongCard({ song, compact = false, allowEdit = true }: So
         <div className={styles.lyricsDiv}>{song.lyrics}</div>
       </div>
       {(compact) ? <div>...</div> : null}
-      <p className={styles.lightText}>Added by {song.owner}</p>
+      {(song.owner) ? <p className={styles.lightText}>Added by {song.owner}</p> : null }
     </div>
   );
 }
