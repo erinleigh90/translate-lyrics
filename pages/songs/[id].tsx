@@ -131,7 +131,7 @@ export default function SongDetails({ song }: SongDetailsParams) {
   return (
     <div className={`${styles.main} ${styles.alignTop}`}>
       <div className={styles.songTranslationParent}>
-        <select name="translateFrom" onChange={handleSelectChange}>
+        <select name="translateFrom" onChange={handleSelectChange} value={translateFrom}>
           <option value="">-- Select One --</option>
           <option value="fr">French</option>
           <option value="es">Spanish</option>
@@ -141,7 +141,7 @@ export default function SongDetails({ song }: SongDetailsParams) {
         <SongCard song={song}></SongCard>
       </div>
       <div className={styles.songTranslationParent}>
-        <select name="translateTo" onChange={handleSelectChange}>
+        <select name="translateTo" onChange={handleSelectChange} value={translateTo}>
           <option value="">-- Select One --</option>
           <option value="fr">French</option>
           <option value="es">Spanish</option>
