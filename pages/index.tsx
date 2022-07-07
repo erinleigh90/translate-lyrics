@@ -1,6 +1,6 @@
 import { withSSRContext } from 'aws-amplify';
 import { serializeModel } from '@aws-amplify/datastore/ssr';
-import { Song } from '../src/models/index';
+import { Song } from '../src/models';
 import SongCard from '../components/songCardLink';
 import styles from '../styles/Home.module.css';
 

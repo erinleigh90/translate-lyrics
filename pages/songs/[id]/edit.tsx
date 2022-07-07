@@ -2,9 +2,8 @@ import { withSSRContext } from 'aws-amplify';
 import { useContext } from "react";
 import { UserContext } from "../../../utilities/userContextMethods";
 import EditSong from '../../../components/editSong';
-import { Song, Artist, Album } from '../../../src/models/index';
+import { Song, Artist, Album } from '../../../src/models';
 import { serializeModel } from '@aws-amplify/datastore/ssr';
-import { getSong, listArtists, listAlbums } from '../../../src/graphql/queries';
 import styles from '../../../styles/Home.module.css';
 
 export async function getServerSideProps(context: any) {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DataStore } from 'aws-amplify';
-import { Song, Artist, Album } from '../src/models/index';
+import { Song } from '../src/models';
 import styles from '../styles/Home.module.css';
 
 export default function HeaderSearch() {
