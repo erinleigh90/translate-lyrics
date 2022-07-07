@@ -61,7 +61,7 @@
     }
   },
   "predictions": {
-    "translateTextTranslator": {
+    "translateTextd2e62343": {
       "providerPlugin": "awscloudformation",
       "service": "Translate",
       "convertType": "translateText"
