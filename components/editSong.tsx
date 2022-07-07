@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { DataStore } from 'aws-amplify';
-import { Song, Artist, Album } from '../src/models/index';
+import { Song, Artist, Album } from '../src/models';
 
 import styles from '../styles/Home.module.css';
 
 type EditParams = {
-  song: Song,
+  song?: Song,
   handleSuccess: Function,
   allArtists: [Artist],
   allAlbums: [Album]  
@@ -78,7 +78,7 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
         console.log(song);
       }
 
-      //handleSuccess(song.id);
+      handleSuccess(song.id);
     } catch (e: any) {
       console.log(e);
       // console.error(...e.errors);
