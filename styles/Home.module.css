@@ -10,6 +10,10 @@
   flex-wrap:wrap;
 }
 
+.main.alignTop {
+  align-items: flex-start;
+}
+
 .footer {
   display: flex;
   flex: 1;
@@ -110,6 +114,7 @@
   align-items: center;
   justify-content: flex-start;
   margin:1rem;
+  width:25rem;
 }
 
 .songTranslationParent .card {
