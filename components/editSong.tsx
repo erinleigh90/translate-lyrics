@@ -17,7 +17,7 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
   const [albumTitle, setAlbumTitle] = useState((song && song.album) ? song.album.title : '');
   const [lyrics, setLyrics] = useState((song) ? song.lyrics : '');
 
-  const handleUserInput = (event: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleUserInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const inputName = event.currentTarget.name;
 
     switch (inputName) {
@@ -36,7 +36,7 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
     }
   }
 
-  const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(artistName, albumTitle, songTitle);
 
