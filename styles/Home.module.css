@@ -89,6 +89,7 @@
   cursor: inherit;
   position: relative;
   max-width: 25rem;
+  width: 25rem;
 }
 
 .card h2 {
