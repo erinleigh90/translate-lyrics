@@ -16,10 +16,6 @@ export default function SongDetails({ song }: SongDetailsParams) {
   const [showTranslation, setShowTranslation] = useState(false);
   const [translatedSong, setTranslatedSong] = useState({ ...song });
 
-  useEffect(() => {
-    translate('fr', 'en');
-  }, []);
-
   const translate = async (translateFrom: string, translateTo: string) => {
     try {
       const titleTranslation = await Predictions.convert({
@@ -66,6 +62,10 @@ export default function SongDetails({ song }: SongDetailsParams) {
       console.log(e);
     }
   }
+  
+  useEffect(() => {
+    translate('fr', 'en');
+  }, []);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     let fromLangauge: string | null = translateFrom;

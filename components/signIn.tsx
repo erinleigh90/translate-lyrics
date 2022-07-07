@@ -99,7 +99,7 @@ export default function SignIn({ handleExit, handleSuccess, authType }: SignInPa
 
   const getResendCodeParagraph = () => {
     if (!codeSent) {
-      return <p className={styles.center}>Can't find your confirmation code? <a onClick={handleResend}>Resend Code</a></p>;
+      return <p className={styles.center}>Can&apos;t find your confirmation code? <a onClick={handleResend}>Resend Code</a></p>;
     }
     return <p className={styles.center}>Code Sent!</p>;
   }
