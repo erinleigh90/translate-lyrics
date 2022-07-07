@@ -2,7 +2,7 @@ import '../styles/globals.css'
 import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
 
-import { Amplify, Auth } from 'aws-amplify';
+import { Amplify, Auth, AuthModeStrategyType } from 'aws-amplify';
 import awsExports from '../src/aws-exports';
 
 import { UserContext } from '../utilities/userContextMethods';
@@ -10,7 +10,13 @@ import SiteHeader from '../components/siteHeader';
 import SignIn from '../components/signIn';
 
 Amplify.Logger.LOG_LEVEL = 'DEBUG';
-Amplify.configure({ ...awsExports, ssr: true });
+Amplify.configure({
+  ...awsExports,
+  ssr: true,
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+  }
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState(null);
