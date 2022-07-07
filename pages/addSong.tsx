@@ -1,4 +1,5 @@
 import { withSSRContext } from 'aws-amplify';
+import { serializeModel } from '@aws-amplify/datastore/ssr';
 import { useContext } from "react";
 import { UserContext } from "../utilities/userContextMethods";
 import EditSong from '../components/editSong';
@@ -18,8 +19,8 @@ export async function getServerSideProps(context: any) {
 
   return {
     props: {
-      allArtists: artists,
-      allAlbums: albums
+      allArtists: serializeModel(artists),
+      allAlbums: serializeModel(albums)
     }
   };
 }
