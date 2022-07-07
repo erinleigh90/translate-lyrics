@@ -1,6 +1,8 @@
 
 import { withSSRContext } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import Predictions, { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
 import { Song } from '../../src/models/index';
 import { serializeModel } from '@aws-amplify/datastore/ssr';
 
@@ -37,6 +39,8 @@ export async function getStaticProps({ params }: any) {
 }
 
 export default function SongDetails({ song }: SongDetailsParams) {
+  Predictions.removePluggable('AmazonAIPredictionsProvider');
+  Predictions.addPluggable(new AmazonAIPredictionsProvider());
   const router = useRouter();
 
   if (router.isFallback) {
@@ -46,6 +50,30 @@ export default function SongDetails({ song }: SongDetailsParams) {
       </div>
     );
   }
+
+  const translate = async () => {
+    try {
+      const translationResult = await Predictions.convert({
+        translateText: {
+          source: {
+            text: song.lyrics,
+            //language: 'fr' // defaults configured on aws-exports.js
+            // supported languages https://docs.aws.amazon.com/translate/latest/dg/how-it-works.html#how-it-works-language-codes
+          },
+          //targetLanguage:'en'
+        }
+      });
+      console.log(translationResult);
+    } catch (e: any) {
+      console.log(e);
+    }
+  }
+
+  const [translatedLyrics, setTranslatedLyrics] = useState('');
+
+  useEffect(() => {
+    translate();
+  }, []);
 
   return (
     <div className={styles.main}><SongCard song={song}></SongCard></div>

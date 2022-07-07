@@ -6,8 +6,8 @@ import { UserContext } from "../utilities/userContextMethods";
 import styles from '../styles/Home.module.css';
 
 type SongCardParams = {
-  song: Song,
-  compact?: Boolean
+  song: Song
+  compact?: boolean
 }
 
 export default function SongCard({ song, compact = false }: SongCardParams) {
