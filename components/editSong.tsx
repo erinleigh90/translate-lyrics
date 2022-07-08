@@ -79,7 +79,7 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
         song = await DataStore.save(new Song({title: songTitle, lyrics: lyrics, artist: artist, album: album}));
       }
 
-      handleSuccess(song.id);
+      // handleSuccess(song.id);
     } catch (e: any) {
       console.log(e);
       // console.error(...e.errors);
