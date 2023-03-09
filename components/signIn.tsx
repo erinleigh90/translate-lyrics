@@ -1,4 +1,4 @@
-import { signUp, confirmEmail, signIn, signOut, resendConfirmationCode } from '../utilities/authMethods';
+import { signUp, confirmEmail, signIn, signOut, resendConfirmationCode } from '../utils/authMethods';
 import styles from '../styles/Home.module.css';
 import { MouseEventHandler, useState } from 'react';
 

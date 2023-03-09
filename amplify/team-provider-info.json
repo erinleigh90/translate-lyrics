@@ -15,6 +15,12 @@
       "auth": {
         "translatelyricscfe2e618": {},
         "true": {}
+      },
+      "api": {
+        "translatelyrics": {}
+      },
+      "predictions": {
+        "translateTextd2e62343": {}
       }
     }
   }

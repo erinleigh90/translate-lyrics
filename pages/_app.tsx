@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app';
 import { Amplify, Auth, AuthModeStrategyType } from 'aws-amplify';
 import awsExports from '../src/aws-exports';
 
-import { UserContext } from '../utilities/userContextMethods';
+import { UserContext } from '../utils/userContextMethods';
 import SiteHeader from '../components/siteHeader';
 import SignIn from '../components/signIn';
 

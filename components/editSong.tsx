@@ -17,9 +17,9 @@ export default function EditSong({ song, handleSuccess, allArtists, allAlbums }:
     song = deserializeModel(Song, song);
   }
   const [songTitle, setSongTitle] = useState((song) ? song.title : '');
-  const [artistName, setArtistName] = useState((song && song.artist) ? song.artist.name : '');
-  const [albumTitle, setAlbumTitle] = useState((song && song.album) ? song.album.title : '');
-  const [lyrics, setLyrics] = useState((song) ? song.lyrics : '');
+  const [artistName, setArtistName] = useState(song?.artist?.name || '');
+  const [albumTitle, setAlbumTitle] = useState(song?.album?.title || '');
+  const [lyrics, setLyrics] = useState(song?.lyrics || '');
 
   const handleUserInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const inputName = event.currentTarget.name;

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { UserContext } from "../utilities/userContextMethods";
+import { UserContext } from "../utils/userContextMethods";
 import Link from 'next/link';
 import SubHeader from '../components/subHeader';
 import HeaderSearch from '../components/headerSearch';

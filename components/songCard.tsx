@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Link from 'next/link';
 import { Song } from '../src/models';
-import { UserContext } from "../utilities/userContextMethods";
+import { UserContext } from "../utils/userContextMethods";
 
 import styles from '../styles/Home.module.css';
 

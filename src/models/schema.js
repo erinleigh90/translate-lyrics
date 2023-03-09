@@ -87,6 +87,7 @@ export const schema = {
                             },
                             {
                                 "allow": "public",
+                                "provider": "apiKey",
                                 "operations": [
                                     "read"
                                 ]
@@ -192,6 +193,7 @@ export const schema = {
                             },
                             {
                                 "allow": "public",
+                                "provider": "apiKey",
                                 "operations": [
                                     "read"
                                 ]
@@ -313,6 +315,7 @@ export const schema = {
                             },
                             {
                                 "allow": "public",
+                                "provider": "apiKey",
                                 "operations": [
                                     "read"
                                 ]
@@ -325,5 +328,6 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
+    "codegenVersion": "3.3.5",
     "version": "832055d33fb5757d9646d66a87441006"
 };

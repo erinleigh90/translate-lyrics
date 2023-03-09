@@ -3,11 +3,10 @@
   "serviceConfiguration": {
     "apiName": "translatelyrics",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/erinleig/Repositories/translate-lyrics/amplify/backend/api/translatelyrics/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "expirationTime": 365,
-      "apiKeyExpirationDate": "2023-07-07T17:16:14.162Z",
+      "apiKeyExpirationDate": "2024-03-07T17:13:44.875Z",
       "keyDescription": "TranslateLyricsAPIKey"
     },
     "additionalAuthTypes": [

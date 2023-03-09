@@ -1,7 +1,7 @@
 
 import { withSSRContext } from 'aws-amplify';
 import { useRouter } from 'next/router';
-import Predictions, { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
+import { Predictions, AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
 import { Song } from '../../src/models';
 import { serializeModel } from '@aws-amplify/datastore/ssr';
 
@@ -47,6 +47,7 @@ export default function SongDetailsParent({ song }: SongDetailsParams) {
       </div>
     );
   }
+  
   Predictions.removePluggable('AmazonAIPredictionsProvider');
   Predictions.addPluggable(new AmazonAIPredictionsProvider());
 

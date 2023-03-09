@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import Predictions from '@aws-amplify/predictions';
+import {Predictions} from '@aws-amplify/predictions';
 import { Song, Album } from '../src/models';
 
 import SongCard from './songCard';
@@ -41,7 +41,7 @@ export default function SongDetails({ song }: SongDetailsParams) {
       });
 
       let album = song.album;
-      if (song.album) { 
+      if (song.album?.title) { 
         const albumTranslation = await Predictions.convert({
           translateText: {
             source: {

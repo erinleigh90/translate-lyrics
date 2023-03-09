@@ -1,7 +1,7 @@
 import { withSSRContext } from 'aws-amplify';
 import { serializeModel } from '@aws-amplify/datastore/ssr';
 import { useContext } from "react";
-import { UserContext } from "../utilities/userContextMethods";
+import { UserContext } from "../utils/userContextMethods";
 import EditSong from '../components/editSong';
 import styles from '../styles/Home.module.css';
 import { Album, Artist } from '../src/models';
