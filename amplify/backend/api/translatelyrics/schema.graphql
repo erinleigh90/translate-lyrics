@@ -3,7 +3,12 @@
 
 type Artist
   @model
-  @auth(rules: [{ allow: owner }, { allow: public, provider: apiKey, operations: [read] }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, provider: apiKey, operations: [read] }
+    ]
+  ) {
   id: ID!
   name: String!
   albums: [Album] @hasMany(indexName: "byArtist", fields: ["id"])
@@ -12,7 +17,12 @@ type Artist
 
 type Album
   @model
-  @auth(rules: [{ allow: owner }, { allow: public, provider: apiKey, operations: [read] }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, provider: apiKey, operations: [read] }
+    ]
+  ) {
   id: ID!
   title: String!
   artistId: ID @index(name: "byArtist", sortKeyFields: ["title"])
@@ -22,7 +32,12 @@ type Album
 
 type Song
   @model
-  @auth(rules: [{ allow: owner }, { allow: public, provider: apiKey, operations: [read] }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, provider: apiKey, operations: [read] }
+    ]
+  ) {
   id: ID!
   title: String!
   lyrics: String!
@@ -30,4 +45,5 @@ type Song
   album: Album @belongsTo(fields: ["albumId"])
   artistId: ID @index(name: "byArtist", sortKeyFields: ["title"])
   artist: Artist @belongsTo(fields: ["artistId"])
+  albumCover: String
 }
