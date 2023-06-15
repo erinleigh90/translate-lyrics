@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import {Predictions} from '@aws-amplify/predictions';
+import {Predictions, InterpretTextCategories} from '@aws-amplify/predictions';
 import { Song, Album } from '../src/models';
 
 import SongCard from './songCard';
@@ -16,7 +16,7 @@ export default function SongDetails({ song }: SongDetailsParams) {
   const [showTranslation, setShowTranslation] = useState(false);
   const [translatedSong, setTranslatedSong] = useState({ ...song });
 
-  const translate = async (translateFrom: string, translateTo: string) => {
+  const translate = async () => {
     try {
       const titleTranslation = await Predictions.convert({
         translateText: {
@@ -63,8 +63,21 @@ export default function SongDetails({ song }: SongDetailsParams) {
     }
   }
 
+  const detectLanguage = async () => { 
+    const detectedLanguage = await Predictions.interpret({
+      text: {
+        source: {
+          text: song.lyrics,
+        },
+        type: InterpretTextCategories.LANGUAGE
+      }
+    });
+    setTranslateFrom(detectedLanguage.textInterpretation.language || 'fr');
+  }
+
   useEffect(() => {
-    translate('fr', 'en');
+    detectLanguage();
+    translate();
   }, []);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

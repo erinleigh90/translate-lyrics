@@ -61,6 +61,11 @@
     }
   },
   "predictions": {
+    "interpretTextb659e7e6": {
+      "interpretType": "interpretText",
+      "providerPlugin": "awscloudformation",
+      "service": "Comprehend"
+    },
     "translateTextd2e62343": {
       "convertType": "translateText",
       "providerPlugin": "awscloudformation",

@@ -20,7 +20,8 @@
         "translatelyrics": {}
       },
       "predictions": {
-        "translateTextd2e62343": {}
+        "translateTextd2e62343": {},
+        "interpretTextb659e7e6": {}
       }
     }
   }

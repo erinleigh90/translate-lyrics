@@ -18,6 +18,10 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "predictions": {
+    "interpretTextb659e7e6": {
+      "region": "string",
+      "type": "string"
+    },
     "translateTextd2e62343": {
       "region": "string",
       "sourceLang": "string",
