@@ -45,5 +45,4 @@ type Song
   album: Album @belongsTo(fields: ["albumId"])
   artistId: ID @index(name: "byArtist", sortKeyFields: ["title"])
   artist: Artist @belongsTo(fields: ["artistId"])
-  albumCover: String
 }
