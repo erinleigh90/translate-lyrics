@@ -1,0 +1,22 @@
+{
+  "appName": "translatelyrics",
+  "roleName": "pinpointLambdaRolee55d8a9b",
+  "cloudformationPolicyName": "cloudformationPolicye55d8a9b",
+  "cloudWatchPolicyName": "cloudWatchPolicye55d8a9b",
+  "pinpointPolicyName": "pinpointPolicye55d8a9b",
+  "authPolicyName": "pinpoint_amplify_e55d8a9b",
+  "unauthPolicyName": "pinpoint_amplify_e55d8a9b",
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "authRoleArn": {
+    "Fn::GetAtt": [
+      "AuthRole",
+      "Arn"
+    ]
+  },
+  "pinpointInAppMessagingPolicyName": "pinpointInAppMessagingPolicyNamee55d8a9b"
+}

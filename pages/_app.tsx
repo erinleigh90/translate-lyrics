@@ -1,13 +1,12 @@
-import '../styles/globals.css'
-import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
+import { useEffect, useState } from 'react';
+import '../styles/globals.css';
 
 import { Amplify, Auth, AuthModeStrategyType } from 'aws-amplify';
-import awsExports from '../src/aws-exports';
-
-import { UserContext } from '../utils/userContextMethods';
-import SiteHeader from '../components/siteHeader';
 import SignIn from '../components/signIn';
+import SiteHeader from '../components/siteHeader';
+import awsExports from '../src/aws-exports';
+import { UserContext } from '../utils/userContextMethods';
 
 Amplify.Logger.LOG_LEVEL = 'DEBUG';
 Amplify.configure({

@@ -22,6 +22,20 @@
       "predictions": {
         "translateTextd2e62343": {},
         "interpretTextb659e7e6": {}
+      },
+      "notifications": {
+        "Pinpoint": {
+          "Name": "translatelyrics-dev",
+          "Id": "67f5b7c072e34b5e9a776e6428925fe0",
+          "Region": "us-east-1"
+        }
+      },
+      "analytics": {
+        "Pinpoint": {
+          "Name": "translatelyrics-dev",
+          "Id": "67f5b7c072e34b5e9a776e6428925fe0",
+          "Region": "us-east-1"
+        }
       }
     }
   }
